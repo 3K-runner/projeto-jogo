@@ -13,7 +13,11 @@ const draw = () => {
   // clear
   ctx.fillStyle = '#232323'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
-
+  
+  // draw maze
+  ctx.fillStyle = 'rgb(50,50,255)'
+  WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
+  
   // draw snake
   ctx.fillStyle = 'rgb(0,200,50)'
   state.snake.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
