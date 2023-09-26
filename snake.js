@@ -28,10 +28,12 @@ const nextMoves = state => avoidMaze(state)
 const nextApple = state => willEat(state) ? rndPos(state) : state.apple
 const nextHead  = state => state.snake.length == 0
   ? { x: 2, y: 2 }
-  : {
-    x: mod(state.cols)(state.snake[0].x + state.moves[0].x),
-    y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
-  }
+  : (avoidMaze(state) //stop from going into wall
+    ? {
+      x: mod(state.cols)(state.snake[0].x + state.moves[0].x),
+      y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
+    }
+    : state.snake[0]) 
 const nextSnake = state => willCrash(state)
   ? []
   : (willEat(state)
