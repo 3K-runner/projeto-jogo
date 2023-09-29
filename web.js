@@ -1,21 +1,13 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+
 // Mutable state
 let state = initialState()
 
-// Constant that represents the size of the pixel art grid
-const BITS = 8
-
 // Position helpers
-// for the entire square
-// -takes a coordinate and resizes it for the canvas
-const x = c => Math.round(c * canvas.width / state.cols)
-const y = r => Math.round(r * canvas.height / state.rows)
-// for art grid
-// -takes a coordinate and applies the grid on it 
-const xg = bc => c => x(bc.x + c.x/BITS)
-const yg = br => r => y(br.y + r.y/BITS)
+const x = c => Math.round(c * canvas.width / state.cols) 
+const y = r => Math.round(r * canvas.height / state.rows) 
 
 // Game loop draw
 const draw = () => {
@@ -24,11 +16,11 @@ const draw = () => {
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   
   // draw maze
-  ctx.fillStyle = 'rgb(50,50,255)'
+  ctx.fillStyle = 'rgb(0,50,255)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
   
   // draw snake
-  ctx.fillStyle = 'rgb(0,200,50)'
+  ctx.fillStyle = 'rgb(255,255,0)'
   state.snake.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
 
   // draw apples
@@ -36,10 +28,6 @@ const draw = () => {
   ctx.fillRect(x(state.apple.x), y(state.apple.y), x(1), y(1))
 
   // add crash
-  if (state.snake.length == 0) {
-    ctx.fillStyle = 'rgb(255,0,0)'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-  }
 }
 
 // Game loop update
