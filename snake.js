@@ -1,15 +1,17 @@
 const base = require('./base')
 Object.getOwnPropertyNames(base).map(p => global[p] = base[p])
 
-// Constants
-const NORTH = { x: 0, y:-1 }
-const SOUTH = { x: 0, y: 1 }
-const EAST  = { x: 1, y: 0 }
-const WEST  = { x:-1, y: 0 }
-const WALLS = [{ x: 0, y: 0},]
+// Constants k
+const NORTH = { x: 0, y: -1} 
+const SOUTH = { x: 0, y: 1 } 
+const EAST  = { x: 1, y: 0 } 
+const WEST  = { x:-1, y: 0 } 
+const WALLS = [{ x:0, y: 1},]
+const START = {x:2, y:2} // Starting position
+const STOP  = { x:0, y: 0} // Move Stop
 
 // Point operations
-const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
+const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y 
 
 // Booleans
 const willEat   = state => pointEq(nextHead(state))(state.apple)
@@ -18,14 +20,16 @@ const avoidMaze = state => WALLS.find(pointEq({
     x: mod(state.cols)(state.snake[0].x + state.moves[0].x),
     y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
   })) ? false : true
-const validMove = move => state =>
-  state.moves[0].x + move.x != 0 || state.moves[0].y + move.y != 0
 
-// Next values based on state
-const nextMoves = state => avoidMaze(state) 
-  ? (state.moves.length > 1 ? dropFirst(state.moves) : state.moves)
-  : [{x: 0, y: 0}] //'STOP's before hitting wall
+const validMove = move => state =>
+  (state.moves[0].x + move.x != 0) || (state.moves[0].y + move.y !=0) || STOP
+
+const nextMoves = state => avoidMaze(state) ? 
+(state.moves.length > 1 ? dropFirst(state.moves) : state.moves)
+  : [STOP] //'STOP's before hitting wall
+  
 const nextApple = state => willEat(state) ? rndPos(state) : state.apple
+
 const nextHead  = state => state.snake.length == 0
   ? { x: 2, y: 2 }
   : (avoidMaze(state) //stop from going into wall
@@ -34,12 +38,12 @@ const nextHead  = state => state.snake.length == 0
       y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
     }
     : state.snake[0]) 
-const nextSnake = state => willCrash(state)
-  ? []
-  : (willEat(state)
-    ? [nextHead(state)].concat(state.snake)
-    : [nextHead(state)].concat(dropLast(state.snake)))
 
+    const nextSnake = state =>
+    willCrash(state)
+      ? state.snake  // Stop
+      : [nextHead(state)]; // Calculate the next position
+  
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
@@ -50,8 +54,8 @@ const rndPos = table => ({
 const initialState = () => ({
   cols:  20,
   rows:  14,
-  moves: [EAST],
-  snake: [],
+  moves: [STOP], 
+  snake: [START],
   apple: { x: 16, y: 2 },
 })
 
@@ -67,4 +71,4 @@ const enqueue = (state, move) => validMove(move)(state)
   ? merge(state)({ moves: state.moves.concat([move]) })
   : state
 
-module.exports = { EAST, NORTH, SOUTH, WEST, WALLS, initialState, enqueue, next, }
+module.exports = { EAST, NORTH, SOUTH, WEST, WALLS,STOP,START, initialState, enqueue, next, }
