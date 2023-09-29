@@ -1,13 +1,21 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+// Constant that represents the art grid size
+const BITS = 32
 
 // Mutable state
 let state = initialState()
 
 // Position helpers
+// for entire square
+// -Takes a coordinate and resizes it for the canvas 
 const x = c => Math.round(c * canvas.width / state.cols) 
 const y = r => Math.round(r * canvas.height / state.rows) 
+// for grid art
+// -Takes a coordinate and applies the grid on it
+const xg = bc => c => x(bc.x + c.x/BITS) 
+const yg = br => r => y(br.y + r.y/BITS)
 
 // Game loop draw
 const draw = () => {
@@ -21,13 +29,17 @@ const draw = () => {
   
   // draw snake
   ctx.fillStyle = 'rgb(255,255,0)'
-  state.snake.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
+  ctx.fillRect(x(state.snake[0].x), y(state.snake[0].y), x(1), y(1)))
 
   // draw apples
   ctx.fillStyle = 'rgb(255,50,0)'
   ctx.fillRect(x(state.apple.x), y(state.apple.y), x(1), y(1))
 
   // add crash
+  if (state.snake.length == 0){
+    ctx.fillStyle = 'rgb(255,0,0)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+  }
 }
 
 // Game loop update
