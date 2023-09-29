@@ -4,9 +4,18 @@ const ctx = canvas.getContext('2d')
 // Mutable state
 let state = initialState()
 
+// Constant that represents the size of the pixel art grid
+const BITS = 8
+
 // Position helpers
+// for the entire square
+// -takes a coordinate and resizes it for the canvas
 const x = c => Math.round(c * canvas.width / state.cols)
 const y = r => Math.round(r * canvas.height / state.rows)
+// for art grid
+// -takes a coordinate and applies the grid on it 
+const xg = bc => c => x(bc.x + c.x/BITS)
+const yg = br => r => y(br.y + r.y/BITS)
 
 // Game loop draw
 const draw = () => {
