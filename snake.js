@@ -54,12 +54,14 @@ const initialState = () => ({
   apple: { x: 16, y: 2 },
 })
 
-const next = spec({
-  rows:  prop('rows'),
-  cols:  prop('cols'),
-  moves: nextMoves,
-  snake: nextSnake,
-  apple: nextApple
+const next = state => (state.snake.length == 0) 
+   ? initialState()
+   : ({
+      cols:  20,
+      rows:  14,
+      moves: nextMoves(state),
+      snake: nextSnake(state),
+      apple: nextApple(state)
 })
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
