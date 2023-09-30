@@ -18,14 +18,12 @@ const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
 // Booleans
 const willEat   = state => pointEq(nextHead(state))(state.apple)
 const willCrash = state => state.snake.find(pointEq(nextHead(state)))
-const avoidMaze = state => WALLS.find(pointEq(nextHead(state)) ? false : true
+const avoidMaze = state => WALLS.find(pointEq(nextHead(state))) ? false : true
 
 const validMove = move => state =>
   (state.moves[0].x + move.x != 0) || (state.moves[0].y + move.y !=0)
 
-const nextMoves = state => avoidMaze(state) ? 
-(state.moves.length > 1 ? dropFirst(state.moves) : state.moves)
-  : [STOP] //'STOP's before hitting wall
+const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
   
 const nextApple = state => willEat(state) ? rndPos(state) : state.apple
 
