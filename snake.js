@@ -66,7 +66,7 @@ const initialState = () => ({
   ghosts: [{ x: 16, y: 4 },{ x: 16, y: 6 }, { x: 16, y: 8 },{ x: 16, y: 10 }]
 })
 
-const next = state => (state.snake.length == 0) 
+const next = state => (willCrash(state)) 
    ? initialState()
    : ({
       cols:  20,
