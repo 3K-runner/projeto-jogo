@@ -63,6 +63,7 @@ const initialState = () => ({
   moves: [STOP], 
   snake: [START],
   apple: { x: 16, y: 2 },
+  ghosts: [{ x: 16, y: 4 },{ x: 16, y: 6 }, { x: 16, y: 8 },{ x: 16, y: 10 }]
 })
 
 const next = state => (state.snake.length == 0) 
