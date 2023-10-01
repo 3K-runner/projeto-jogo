@@ -34,6 +34,15 @@ const draw = () => {
   // draw apples
   ctx.fillStyle = 'rgb(255,50,0)'
   ctx.fillRect(x(state.apple.x), y(state.apple.y), x(1), y(1))
+  // draw Ghosts
+  ctx.fillStyle = 'rgb(255,182,193)'
+  ctx.fillRect(x(state.ghosts[0].x), y(state.ghosts[0].y), x(1), y(1))
+  ctx.fillStyle = 'rgb(255,0,0)'
+  ctx.fillRect(x(state.ghosts[1].x), y(state.ghosts[1].y), x(1), y(1))
+  ctx.fillStyle = 'rgb(0,255,255)'
+  ctx.fillRect(x(state.ghosts[2].x), y(state.ghosts[2].y), x(1), y(1))
+  ctx.fillStyle = 'rgb(236,236,83)'
+  ctx.fillRect(x(state.ghosts[3].x), y(state.ghosts[3].y), x(1), y(1))
 
   // add crash
   if (state.snake.length == 0){
