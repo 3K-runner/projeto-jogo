@@ -73,7 +73,13 @@ const next = state => (state.snake.length == 0)
       rows:  14,
       moves: nextMoves(state),
       snake: nextSnake(state),
-      apple: nextApple(state)
+      apple: nextApple(state),
+      ghosts: [
+        nextGhost1(state),
+        nextGhost2(state),
+        nextGhost3(state),
+        nextGhost4(state)
+      ]
 })
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
