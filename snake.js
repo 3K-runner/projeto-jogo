@@ -39,6 +39,11 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
+const nextGhost1 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[0];
+const nextGhost2 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[1];
+const nextGhost3 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[2];
+const nextGhost4 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[3];
+
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
