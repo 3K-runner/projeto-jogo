@@ -38,11 +38,17 @@ const nextSnake = state => willCrash(state)
      // Stops the snake when facing a wall
       ? [nextHead(state)] 
       : state.snake) 
-  
+
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
   y: rnd(0)(table.rows - 1)
+})
+
+// Fixed position 
+const fixPos = table => ({
+  x: table.ghosts[ghostIndex].x,
+  y: table.ghosts[ghostIndex].y
 })
 
 // Initial state
