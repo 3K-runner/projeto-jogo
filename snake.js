@@ -59,15 +59,12 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextGhost1 = state => nextBeak(state)(0);
-const nextGhost2 = state => nextBeak(state)(1);
-const nextGhost3 = state => nextBeak(state)(2);
-const nextGhost4 = state => nextBeak(state)(3);
+const nextGhost = state => i => nextBeak(state)(i);
 
-const nextBirds = state => [nextGhost1(state), 
-                            nextGhost2(state),
-                            nextGhost3(state),
-                            nextGhost4(state)]
+const nextBirds = state => [nextGhost(state)(0), 
+                            nextGhost(state)(1),
+                            nextGhost(state)(2),
+                            nextGhost(state)(3)]
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
