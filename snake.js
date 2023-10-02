@@ -9,23 +9,28 @@ const EAST  = { x: 1, y: 0 }
 const WEST  = { x:-1, y: 0 }
 const STOP  = { x: 0, y: 0 } // Move Stop
 // position
-const WALLS = [{ x:0, y: 1},]
-const START = {x:2, y:2} // Starting position
+const WALLS  = [{ x:0, y: 1}]
+const FRUITS = [{ x:16, y: 2}]
+const START  = {x:2, y:2} // Starting position
+const STARTBIRDS = [{ x:16, y: 4 }, 
+                    { x:16, y: 6 }, 
+                    { x:16, y: 8 },
+                    { x:16, y:10 }]
 
 // Point operations
 const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y 
 
 // Booleans
-const willEat   = state => pointEq(nextHead(state))(state.apple)
+const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
 const willCrash = (state) => state.ghosts.some(ghost => pointEq(nextHead(state))(ghost))
-const avoidMaze = state => WALLS.find(pointEq(nextHead(state))) ? false : true
+const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
 
 const validMove = move => state =>
   (state.moves[0].x + move.x != 0) || (state.moves[0].y + move.y !=0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
   
-const nextApple = state => willEat(state) ? rndPos(state) : state.apple
+const nextApple = state => state.apple.filter(wontEat(state))
 
 const nextHead  = state => ({
       x: mod(state.cols)(state.snake[0].x + state.moves[0].x),
@@ -33,27 +38,25 @@ const nextHead  = state => ({
     })
 
 const nextSnake = state => willCrash(state)
-   ? [START] 
+   ? [] 
    : (avoidMaze(state) 
      // Stops the snake when facing a wall
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextGhost1 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[0];
-const nextGhost2 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[1];
-const nextGhost3 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[2];
-const nextGhost4 = (state) => willCrash(state) ? fixPos(state) : state.ghosts[3];
+const nextGhost1 = state => state.ghosts[0];
+const nextGhost2 = state => state.ghosts[1];
+const nextGhost3 = state => state.ghosts[2];
+const nextGhost4 = state => state.ghosts[3];
 
+const nextBirds = state => [nextGhost1(state), 
+                            nextGhost2(state),
+                            nextGhost3(state),
+                            nextGhost4(state)]
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
   y: rnd(0)(table.rows - 1)
-})
-
-// Fixed position 
-const fixPos = table => ({
-  x: table.ghosts[ghostIndex].x,
-  y: table.ghosts[ghostIndex].y
 })
 
 // Initial state
@@ -62,25 +65,32 @@ const initialState = () => ({
   rows:  14,
   moves: [STOP], 
   snake: [START],
-  apple: { x: 16, y: 2 },
-  ghosts: [{ x: 16, y: 4 },{ x: 16, y: 6 }, { x: 16, y: 8 },{ x: 16, y: 10 }]
+  apple: FRUITS,
+  ghosts: STARTBIRDS
 })
 
-const next = state => (willCrash(state)) 
-   ? initialState()
-   : ({
+// Bird eats snake state
+const eatenState = state => ({
+  cols:  20,
+  rows:  14,
+  moves: [STOP], 
+  snake: [START],
+  apple: state.apple,
+  ghosts: STARTBIRDS
+})
+
+const next = state => state.snake.length == 0 
+   ? eatenState(state)
+   : (state.apple.length == 0
+      ? initialState()
+      : ({
       cols:  20,
       rows:  14,
       moves: nextMoves(state),
       snake: nextSnake(state),
       apple: nextApple(state),
-      ghosts: [
-        nextGhost1(state),
-        nextGhost2(state),
-        nextGhost3(state),
-        nextGhost4(state)
-      ]
-})
+      ghosts: nextBirds(state)
+}))
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
   : state
