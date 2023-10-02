@@ -26,14 +26,11 @@ const draw = () => {
   // draw maze
   ctx.fillStyle = 'rgb(0,50,255)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
-  
-  // draw snake
-  ctx.fillStyle = 'rgb(255,255,0)'
-  ctx.fillRect(x(state.snake[0].x), y(state.snake[0].y), x(1), y(1)))
 
   // draw apples
   ctx.fillStyle = 'rgb(255,50,0)'
-  ctx.fillRect(x(state.apple.x), y(state.apple.y), x(1), y(1))
+  state.apple.map(p => ctx.fillRect(x(p.x + 1/4), y(p.y + 1/4), x(1/2), y(1/2)))
+
   // draw Ghosts
   ctx.fillStyle = 'rgb(255,182,193)'
   ctx.fillRect(x(state.ghosts[0].x), y(state.ghosts[0].y), x(1), y(1))
@@ -48,6 +45,10 @@ const draw = () => {
   if (state.snake.length == 0){
     ctx.fillStyle = 'rgb(255,0,0)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
+  } else {
+    // draw snake
+    ctx.fillStyle = 'rgb(255,255,0)'
+    ctx.fillRect(x(state.snake[0].x), y(state.snake[0].y), x(1), y(1)))
   }
 }
 
