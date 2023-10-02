@@ -35,7 +35,7 @@ const nextPeck2 = state => STOP
 const nextPeck3 = state => STOP
 const nextPeck4 = state => STOP
 
-const nextPecks = [nextPeck1(state),
+const nextPecks = state => [nextPeck1(state),
                    nextPeck2(state),
                    nextPeck3(state),
                    nextPeck4(state)]
