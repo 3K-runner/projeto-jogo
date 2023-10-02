@@ -22,7 +22,7 @@ const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
 
 // Booleans
 const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
-const willCrash = (state) => state.ghosts.some(ghost => pointEq(nextHead(state))(ghost))
+const willCrash = (state) => state.ghosts.some(pointEq(nextHead(state)))
 const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
 
 const validMove = move => state =>
