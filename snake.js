@@ -29,12 +29,27 @@ const validMove = move => state =>
   (state.moves[0].x + move.x != 0) || (state.moves[0].y + move.y !=0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
-  
+
+const nextPeck1 = state => STOP
+const nextPeck2 = state => STOP
+const nextPeck3 = state => STOP
+const nextPeck4 = state => STOP
+
+const nextPecks = [nextPeck1(state),
+                   nextPeck2(state),
+                   nextPeck3(state),
+                   nextPeck4(state)]
+
 const nextApple = state => state.apple.filter(wontEat(state))
 
 const nextHead  = state => ({
       x: mod(state.cols)(state.snake[0].x + state.moves[0].x),
       y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
+    })
+
+const nextBeak  = state => i => ({
+      x: mod(state.cols)(state.ghosts[i].x + state.pecks[i].x),
+      y: mod(state.rows)(state.ghosts[i].y + state.pecks[i].y)
     })
 
 const nextSnake = state => willCrash(state)
@@ -44,10 +59,10 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextGhost1 = state => state.ghosts[0];
-const nextGhost2 = state => state.ghosts[1];
-const nextGhost3 = state => state.ghosts[2];
-const nextGhost4 = state => state.ghosts[3];
+const nextGhost1 = state => nextBeak(state)(0);
+const nextGhost2 = state => nextBeak(state)(1);
+const nextGhost3 = state => nextBeak(state)(2);
+const nextGhost4 = state => nextBeak(state)(3);
 
 const nextBirds = state => [nextGhost1(state), 
                             nextGhost2(state),
@@ -66,6 +81,7 @@ const initialState = () => ({
   moves: [STOP], 
   snake: [START],
   apple: FRUITS,
+  pecks: [STOP, STOP, STOP, STOP],
   ghosts: STARTBIRDS
 })
 
@@ -76,6 +92,7 @@ const eatenState = state => ({
   moves: [STOP], 
   snake: [START],
   apple: state.apple,
+  pecks: [STOP, STOP, STOP, STOP],
   ghosts: STARTBIRDS
 })
 
@@ -89,6 +106,7 @@ const next = state => state.snake.length == 0
       moves: nextMoves(state),
       snake: nextSnake(state),
       apple: nextApple(state),
+      pecks: nextPecks(state),
       ghosts: nextBirds(state)
 }))
 
