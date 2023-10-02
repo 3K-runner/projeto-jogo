@@ -48,7 +48,7 @@ const draw = () => {
   } else {
     // draw snake
     ctx.fillStyle = 'rgb(255,255,0)'
-    ctx.fillRect(x(state.snake[0].x), y(state.snake[0].y), x(1), y(1)))
+    ctx.fillRect(x(state.snake[0].x), y(state.snake[0].y), x(1), y(1))
   }
 }
 
