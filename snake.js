@@ -9,7 +9,11 @@ const EAST  = { x: 1, y: 0 }
 const WEST  = { x:-1, y: 0 }
 const STOP  = { x: 0, y: 0 } // Move Stop
 // position
-const WALLS  = [{ x:0, y: 1}]
+const WALLS  = [{ x:0, y: 0},
+                { x:1, y: 0},
+                { x:2, y: 0},
+                { x:0, y: 1},
+                { x:0, y: 2}]
 const FRUITS = [{ x:16, y: 2}]
 const START  = {x:2, y:2} // Starting position
 const STARTBIRDS = [{ x:16, y: 4 }, 
@@ -46,7 +50,7 @@ const nextPeck4 = state => {
                     y: (2 * target1.y - target2.y)
   })
 
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghosts[0])
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghosts[3])
 
   return optionsPeck4[0];
 }
@@ -75,12 +79,15 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextGhost = state => i => nextBeak(state)(i)(state.pecks[i]);
+const nextGhost1 = state => nextBeak(state)(0)(nextPeck1(state));
+const nextGhost2 = state => nextBeak(state)(1)(nextPeck2(state));
+const nextGhost3 = state => nextBeak(state)(2)(nextPeck3(state));
+const nextGhost4 = state => nextBeak(state)(3)(nextPeck4(state));
 
-const nextBirds = state => [nextGhost(state)(0), 
-                            nextGhost(state)(1),
-                            nextGhost(state)(2),
-                            nextGhost(state)(3)]
+const nextBirds = state => [nextGhost1(state), 
+                            nextGhost2(state),
+                            nextGhost3(state),
+                            nextGhost4(state)]
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
