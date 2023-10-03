@@ -46,7 +46,7 @@ const nextPeck4 = state => {
                     y: (2 * target1.y - target2.y)
   })
 
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghost[0])
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghosts[0])
 
   return optionsPeck4[0];
 }
