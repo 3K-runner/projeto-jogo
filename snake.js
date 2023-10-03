@@ -22,8 +22,10 @@ const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
 
 // Booleans
 const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
-const willCrash = (state) => state.ghosts.some(pointEq(nextHead(state)))
+const willCrash = state => state.ghosts.some(pointEq(nextHead(state)))
 const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
+const avoidMazeB = state => i => peck => WALLS.some(pointEq(nextBeak(state)(i)(peck))) ? false : true
+
 
 const notOpositeMove = state => i=> peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
