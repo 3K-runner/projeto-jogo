@@ -184,7 +184,23 @@ const notOpositeMove = state => i=> peck =>
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
 
-const nextPeck1 = state => STOP
+const nextPeck1 = state => {
+  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
+  const optionsPeck2 = optionsPeck1
+    .filter(p => notOpositeMove(state)(0)(p))
+    .filter(p => avoidMazeB(state)(0)(p));
+// Escape deadends
+  if (optionsPeck2.length === 0) {
+    return ({ x: 0 - state.pecks[0].x, y: 0 - state.pecks[0].y });
+  }
+  const targetPosition = {
+    x: 2 * nextHead(state).x - state.ghosts[0].x,
+    y: 2 * nextHead(state).y - state.ghosts[0].y,
+  };
+  const optionsPeck3 = orderMoves(optionsPeck2)(targetPosition)(state.ghosts[0]);
+  return optionsPeck3[0];
+};
+
 const nextPeck2 = state => STOP
 const nextPeck3 = state => STOP
 const nextPeck4 = state => {
