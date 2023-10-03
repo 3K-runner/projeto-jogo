@@ -246,10 +246,13 @@ const nextGhost2 = state => nextBeak(state)(1)(nextPeck2(state));
 const nextGhost3 = state => nextBeak(state)(2)(nextPeck3(state));
 const nextGhost4 = state => nextBeak(state)(3)(nextPeck4(state));
 
-const nextBirds = state => [nextGhost1(state), 
-                            nextGhost2(state),
-                            nextGhost3(state),
-                            nextGhost4(state)]
+const nextBirds = state => pointEq(state.moves[0])(STOP) 
+   ? state.ghosts
+   : [nextGhost1(state), 
+      nextGhost2(state),
+      nextGhost3(state),
+      nextGhost4(state)]
+   
 // Randomness
 const rndPos = table => ({
   x: rnd(0)(table.cols - 1),
