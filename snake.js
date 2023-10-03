@@ -25,8 +25,8 @@ const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
 const willCrash = (state) => state.ghosts.some(pointEq(nextHead(state)))
 const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
 
-const validMove = move => state =>
-  (state.moves[0].x + move.x != 0) || (state.moves[0].y + move.y !=0)
+const notOpositeMove = peck => state =>
+  (state.pecks[0].x + peck.x != 0) || (state.pecks[0].y + peck.y !=0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
 
