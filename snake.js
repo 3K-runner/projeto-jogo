@@ -51,7 +51,10 @@ const nextPeck4 = state => {
   })
 
   const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghosts[3])
-
+  // Escape deadends
+  if(optionsPeck4.length == 0){
+     return ({ x: 0 - state.pecks[3].x, y: 0 - state.pecks[3].y });
+  }
   return optionsPeck4[0];
 }
 
