@@ -47,9 +47,9 @@ const nextHead  = state => ({
       y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
     })
 
-const nextBeak  = state => i => ({
-      x: mod(state.cols)(state.ghosts[i].x + state.pecks[i].x),
-      y: mod(state.rows)(state.ghosts[i].y + state.pecks[i].y)
+const nextBeak  = state => i => move => ({
+      x: mod(state.cols)(state.ghosts[i].x + move.x),
+      y: mod(state.rows)(state.ghosts[i].y + move.y)
     })
 
 const nextSnake = state => willCrash(state)
