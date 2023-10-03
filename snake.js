@@ -34,7 +34,21 @@ const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : s
 
 const nextPeck1 = state => STOP
 const nextPeck2 = state => STOP
-const nextPeck3 = state => STOP
+const nextPeck3 = state => {
+  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST]
+  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(3)(p))
+  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(3)(p))
+
+  const target1 = nextHead(state)
+  const target2 = state.ghosts[0]
+  const target3 = ({x: (2 * target1.x - target2.x),
+                    y: (2 * target1.y - target2.y)
+  })
+
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghost[0])
+
+  return optionsPeck4[0];
+}
 const nextPeck4 = state => STOP
 
 const nextPecks = state => [nextPeck1(state),
