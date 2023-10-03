@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
 // Constant that represents the art grid size
-const BITS = 32
+const BITS = 16
 
 // Art "Sprites"
 const SGUINE = [{x: 7, y: 2, l: 2, colour: 'rgb(56,56,56)'},
