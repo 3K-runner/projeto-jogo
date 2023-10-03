@@ -11,7 +11,7 @@ const orderMoves = (moves) => (ghostPosition) => (snakePosition) => {
   const distances = moves.map((move) => distance(ghostPosition)({ x: snakePosition.x + move.x, y: snakePosition.y + move.y}))
 
   // Ordered directions
- const movementInOrder = [...moves].toSorted((a, b) => distances[moves.indexOf(a)] - distances[moves.indexOf(b)])
+ const movementInOrder = [...moves].sort((a, b) => distances[moves.indexOf(a)] - distances[moves.indexOf(b)])
 
   return movementInOrder;
 }
