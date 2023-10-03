@@ -59,7 +59,7 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextGhost = state => i => nextBeak(state)(i);
+const nextGhost = state => i => nextBeak(state)(i)(state.pecks[i]);
 
 const nextBirds = state => [nextGhost(state)(0), 
                             nextGhost(state)(1),
