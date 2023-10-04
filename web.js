@@ -67,6 +67,81 @@ const SGUINE = [{x: 7, y: 2, l: 2, colour: 'rgb(56,56,56)'},
 {x: 9, y:15, l: 1, colour: 'rgb(0,0,0)'},
 {x:11, y:15, l: 1, colour: 'rgb(0,0,0)'}]
 
+const SECY = [
+{x: 6, y: 2, l: 1, colour: 'rgb(0,0,0)'},
+{x: 5, y: 3, l: 1, colour: 'rgb(0,0,0)'},
+{x: 9, y: 2, l: 1, colour: 'rgb(0,0,0)'},
+{x: 8, y: 3, l: 1, colour: 'rgb(0,0,0)'},
+{x: 12, y: 2, l: 1, colour: 'rgb(0,0,0)'},
+{x: 11, y: 3, l: 1, colour: 'rgb(0,0,0)'},
+
+{x: 5, y: 4, l: 6, colour: 'rgb(0,0,0)'},
+
+{x: 4, y: 5, l: 8, colour: 'rgb(0,0,0)'},
+
+{x: 3, y: 6, l:10, colour: 'rgb(0,0,0)'},
+{x: 5, y: 5, l: 6, colour: 'rgb(165,165,165)'},
+
+{x: 2, y: 7, l:12, colour: 'rgb(0,0,0)'},
+
+{x: 6, y: 7, l: 4, colour: 'rgb(0,0,0)'},
+{x: 4, y: 6, l: 8, colour: 'rgb(165,165,165)'},
+{x: 5, y: 6, l: 2, colour: 'rgb(255,255,255)'},
+{x: 9, y: 6, l: 2, colour: 'rgb(255,255,255)'},
+
+{x: 3, y: 7, l: 9, colour: 'rgb(165,165,165)'},
+{x: 5, y: 7, l: 1, colour: 'rgb(255,255,255)'},
+{x: 10, y: 7, l: 1, colour: 'rgb(255,255,255)'},
+{x: 6, y: 7, l: 1, colour: 'rgb(0,0,0)'},
+{x: 9, y: 7, l: 1, colour: 'rgb(0,0,0)'},
+
+{x: 5, y: 8, l: 2, colour: 'rgb(165,20,17)'},
+{x: 7, y: 7, l: 2, colour: 'rgb(214,173,34)'},
+
+
+{x: 1, y: 8, l:14, colour: 'rgb(0,0,0)'},
+{x: 3, y: 8, l:10, colour: 'rgb(0,0,0)'}, 
+{x: 2, y: 8, l: 1, colour: 'rgb(165,165,165)'},
+{x: 3, y: 8, l: 9, colour: 'rgb(165,165,165)'},
+{x: 13, y: 8, l: 1, colour: 'rgb(165,165,165)'},
+{x: 7, y: 8, l: 2, colour: 'rgb(214,173,34)'},
+{x: 9, y: 8, l: 2, colour: 'rgb(165,20,17)'},
+{x: 5, y: 8, l: 2, colour: 'rgb(165,20,17)'},
+
+
+{x: 1, y: 9, l:14, colour: 'rgb(0,0,0)'},
+{x: 3, y: 9, l:10, colour: 'rgb(0,0,0)'}, 
+{x: 2, y: 9, l: 1, colour: 'rgb(165,165,165)'},
+{x: 13, y: 9, l: 1, colour: 'rgb(165,165,165)'},
+{x: 3, y: 9, l: 9, colour: 'rgb(165,165,165)'},
+{x: 7, y: 9, l: 2, colour: 'rgb(165,20,17)'},
+
+{x: 1, y:10, l:14, colour: 'rgb(0,0,0)'},
+{x: 3, y:10, l:10, colour: 'rgb(0,0,0)'}, 
+{x: 2, y: 10, l: 1, colour: 'rgb(165,165,165)'},
+{x: 13, y: 10, l: 1, colour: 'rgb(165,165,165)'},
+{x: 3, y: 10, l: 9, colour: 'rgb(165,165,165)'},
+
+{x: 2, y: 11, l:12, colour: 'rgb(0,0,0)'},
+{x: 4, y: 11, l: 8, colour: 'rgb(165,165,165)'},
+{x: 6 , y: 11, l: 4, colour: 'rgb(255,255,255)'},
+
+{x: 4, y:12, l: 8, colour: 'rgb(0,0,0)'},
+{x: 6, y:12, l: 4, colour: 'rgb(0,0,0)'},
+{x: 5, y: 12, l: 1, colour: 'rgb(255,255,255)'},
+{x: 10, y: 12, l: 1, colour: 'rgb(255,255,255)'},
+
+{x: 5, y:13, l: 1, colour: 'rgb(0,0,0)'}, 
+{x:10, y:13, l: 1, colour: 'rgb(0,0,0)'},
+
+{x: 5, y:14, l: 1, colour: 'rgb(0,0,0)'},
+{x:10, y:14, l: 1, colour: 'rgb(0,0,0)'}, 
+
+{x: 4, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x: 6, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x: 9, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x:11, y:15, l: 1, colour: 'rgb(0,0,0)'}]
+
 // Mutable state
 let state = initialState()
 
@@ -98,9 +173,11 @@ const draw = () => {
   ctx.fillStyle = 'rgb(255,182,193)'
   ctx.fillRect(x(state.ghosts[0].x), y(state.ghosts[0].y), x(1), y(1))
   
-  ctx.fillStyle = 'rgb(255,0,0)'
-  ctx.fillRect(x(state.ghosts[1].x), y(state.ghosts[1].y), x(1), y(1))
-
+  SECY.map(p => {
+    ctx.fillStyle = p.colour
+    ctx.fillRect(xg(state.ghosts[1])(p), yg(state.ghosts[1])(p), x(p.l/BITS), y(1/BITS))
+    })
+ 
   SGUINE.map(p => {
   ctx.fillStyle = p.colour
   ctx.fillRect(xg(state.ghosts[2])(p), yg(state.ghosts[2])(p), x(p.l/BITS), y(1/BITS))
