@@ -174,7 +174,7 @@ const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
 
 // Booleans
 const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
-const willCrash = state => (state.ghosts.some(pointEq(nextHead(state)))) || (state.ghosts.some(pointEq(state.snake[0])))
+const willCrash = state => (state.birds.some(pointEq(nextHead(state)))) || (state.birds.some(pointEq(state.snake[0])))
 const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
 const avoidMazeB = state => i => peck => WALLS.some(pointEq(nextBeak(state)(i)(peck))) ? false : true
 
@@ -188,7 +188,7 @@ const nextPeck1 = state => {
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
   const optionsPeck2 = optionsPeck1.filter(p => notOpositeMove(state)(0)(p))
   const optionsPeck3 = optionsPeck2 .filter(p => avoidMazeB(state)(0)(p));
-  const optionsPeck4 = orderMoves(optionsPeck3)(state.snake[0])(state.ghosts[0]);
+  const optionsPeck4 = orderMoves(optionsPeck3)(state.snake[0])(state.birds[0]);
 // Escape deadends
   if (optionsPeck4.length === 0) {
     return ({ x: 0 - state.pecks[0].x, y: 0 - state.pecks[0].y });
@@ -204,7 +204,7 @@ const nextPeck2 = state => {
       ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
       :  ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)});
 
-  const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.ghosts[1]);
+  const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.birds[1]);
 
   // Escape deadends
   if (optionsPeck4.length == 0) {
@@ -225,14 +225,14 @@ const nextPeck3 = state => {
   const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(2)(p))
 
   // Calculates the distance
-  const radiusPeck = distance(state.snake[0])(state.ghosts[2])
+  const radiusPeck = distance(state.snake[0])(state.birds[2])
   // Choice of target based on the genral movement rule
   const target = (radiusPeck <= 10) 
      ? ({ x: 0, y:16 })
      : state.snake[0]
   
   // Prioritizes movements based on the target
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.ghosts[2])
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.birds[2])
   // Escape deadends
   if(optionsPeck4.length == 0){
      return ({ x: 0 - state.pecks[2].x, y: 0 - state.pecks[2].y });
@@ -245,12 +245,12 @@ const nextPeck4 = state => {
   const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(3)(p))
 
   const target1 = nextHead(state)
-  const target2 = state.ghosts[0]
+  const target2 = state.birds[0]
   const target3 = ({x: (2 * target1.x - target2.x),
                     y: (2 * target1.y - target2.y)
   })
 
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.ghosts[3])
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.birds[3])
   // Escape deadends
   if(optionsPeck4.length == 0){
      return ({ x: 0 - state.pecks[3].x, y: 0 - state.pecks[3].y });
@@ -271,8 +271,8 @@ const nextHead  = state => ({
     })
 
 const nextBeak  = state => i => move => ({
-      x: mod(state.cols)(state.ghosts[i].x + move.x),
-      y: mod(state.rows)(state.ghosts[i].y + move.y)
+      x: mod(state.cols)(state.birds[i].x + move.x),
+      y: mod(state.rows)(state.birds[i].y + move.y)
     })
 
 const nextSnake = state => willCrash(state)
@@ -282,17 +282,17 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextGhost1 = state => nextBeak(state)(0)(nextPeck1(state));
-const nextGhost2 = state => nextBeak(state)(1)(nextPeck2(state));
-const nextGhost3 = state => nextBeak(state)(2)(nextPeck3(state));
-const nextGhost4 = state => nextBeak(state)(3)(nextPeck4(state));
+const nextBird1 = state => nextBeak(state)(0)(nextPeck1(state));
+const nextBird2 = state => nextBeak(state)(1)(nextPeck2(state));
+const nextBird3 = state => nextBeak(state)(2)(nextPeck3(state));
+const nextBird4 = state => nextBeak(state)(3)(nextPeck4(state));
 
 const nextBirds = state => pointEq(state.moves[0])(STOP) 
-   ? state.ghosts
-   : [nextGhost1(state), 
-      nextGhost2(state),
-      nextGhost3(state),
-      nextGhost4(state)]
+   ? state.birds
+   : [nextBird1(state), 
+      nextBird2(state),
+      nextBird3(state),
+      nextBird4(state)]
    
 // Randomness
 const rndPos = table => ({
@@ -308,7 +308,7 @@ const initialState = () => ({
   snake: [START],
   apple: FRUITS,
   pecks: [STOP, STOP, STOP, STOP],
-  ghosts: STARTBIRDS
+  birds: STARTBIRDS
 })
 
 // Bird eats snake state
@@ -319,7 +319,7 @@ const eatenState = state => ({
   snake: [START],
   apple: state.apple,
   pecks: [STOP, STOP, STOP, STOP],
-  ghosts: STARTBIRDS
+  birds: STARTBIRDS
 })
 
 const next = state => state.snake.length == 0 
@@ -333,7 +333,7 @@ const next = state => state.snake.length == 0
       snake: nextSnake(state),
       apple: nextApple(state),
       pecks: nextPecks(state),
-      ghosts: nextBirds(state)
+      birds: nextBirds(state)
 }))
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
