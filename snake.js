@@ -195,8 +195,23 @@ const nextPeck1 = state => {
   }
   return optionsPeck4[0];
 };
+const nextPeck2 = state => {
+  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
+  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(1)(p));
+  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(1)(p));
+  const target =
+      pointEq(state.moves[0])(NORTH)
+      ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
+      :  ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)});
 
-const nextPeck2 = state => STOP
+  const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.ghosts[1]);
+
+  // Escape deadends
+  if (optionsPeck4.length == 0) {
+    return ({ x: 0 - state.pecks[1].x, y: 0 - state.pecks[1].y });
+  }
+  return optionsPeck4[0];
+}
 const nextPeck3 = state => STOP
 const nextPeck4 = state => {
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST]
