@@ -212,7 +212,33 @@ const nextPeck2 = state => {
   }
   return optionsPeck4[0];
 }
-const nextPeck3 = state => STOP
+const nextPeck3 = state => {
+  // General movement rule:
+  //   Goes after the snake if distant,
+  //   but goes to the bottom left corner if close
+
+  // Preference for anti-clockwise movement
+  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST]
+  // Avoids turning around
+  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(2)(p))
+  // Does not hit the maze walls
+  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(2)(p))
+
+  // Calculates the distance
+  const radiusPeck = distance(state.snake[0])(state.ghosts[2])
+  // Choice of target based on the genral movement rule
+  const target = (radiusPeck <= 10) 
+     ? ({ x: 0, y:16 })
+     : state.snake[0]
+  
+  // Prioritizes movements based on the target
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.ghosts[2])
+  // Escape deadends
+  if(optionsPeck4.length == 0){
+     return ({ x: 0 - state.pecks[2].x, y: 0 - state.pecks[2].y });
+  }
+  return optionsPeck4[0];
+}
 const nextPeck4 = state => {
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST]
   const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(3)(p))
