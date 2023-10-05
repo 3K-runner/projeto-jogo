@@ -326,6 +326,68 @@ const OWL = [{x: 5, y: 2, l: 6, colour: 'rgb(00,00,00)'},
 {x: 6, y:15, l: 1, colour: 'rgb(0,0,0)'},
 {x: 9, y:15, l: 1, colour: 'rgb(0,0,0)'},
 {x:11, y:15, l: 1, colour: 'rgb(0,0,0)'}]
+
+ const SNAKE = [
+  {x: 6, y: 2, l: 6, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 3, l: 1, colour: 'rgb(00,00,00)'},
+  {x: 6, y: 3, l: 6, colour: 'rgb(17,134,00)'},
+  {x: 12, y: 3, l: 1, colour: 'rgb(00,00,00)'},
+
+  {x: 4, y: 4, l: 10, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 4, l: 8, colour: 'rgb(17,134,00)'},
+  {x: 6, y: 4, l: 2, colour: 'rgb(255,255,255)'},
+  {x: 10, y: 4, l: 2, colour: 'rgb(255,255,255)'},
+
+  {x: 4, y: 5, l: 10, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 5, l: 8, colour: 'rgb(17,134,00)'},
+  {x: 6, y: 5, l: 1, colour: 'rgb(255,255,255)'},
+  {x: 11, y: 5, l: 1, colour: 'rgb(255,255,255)'},
+  {x: 7, y: 5, l: 1, colour: 'rgb(00,00,00)'},
+  {x: 10, y: 5, l: 1, colour: 'rgb(00,00,00)'},
+
+  {x: 4, y: 6, l: 10, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 6, l: 8, colour: 'rgb(17,134,00)'},
+
+  {x: 4, y: 7, l: 10, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 7, l: 8, colour: 'rgb(17,134,00)'},
+  {x: 6, y: 7, l: 6, colour: 'rgb(7,54,0)'},
+
+  {x: 4, y: 8, l: 10, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 8, l: 8, colour: 'rgb(17,134,00)'},
+  {x: 7, y: 8, l: 1, colour: 'rgb(255,255,255)'},
+  {x: 8, y: 8, l: 2, colour: 'rgb(155,36,25)'},
+  {x: 10, y: 8, l: 1, colour: 'rgb(255,255,255'},
+
+  {x: 4, y: 9, l: 10, colour: 'rgb(00,00,00)'},
+  {x: 5, y: 9, l: 8, colour: 'rgb(17,134,00)'},
+  {x: 8, y: 9, l: 1, colour: 'rgb(155,36,25)'},
+  {x: 15, y: 9, l: 1, colour: 'rgb(00,00,00)'},
+
+  {x: 5, y: 10, l: 8, colour: 'rgb(00,00,00)'},
+  {x: 6, y: 10, l: 6, colour: 'rgb(17,134,00)'},
+  {x: 14, y: 10, l: 3, colour: 'rgb(00,00,00)'},
+  {x: 15, y: 10, l: 1, colour: 'rgb(17,134,00)'},
+
+  {x: 6, y: 11, l: 6, colour: 'rgb(00,00,00)'},
+  {x: 7, y: 11, l: 4, colour: 'rgb(17,134,00)'},
+  {x: 14, y: 11, l: 3, colour: 'rgb(00,00,00)'},
+  {x: 15, y: 11, l: 1, colour: 'rgb(17,134,00)'},
+
+  {x: 4, y: 12, l: 12, colour: 'rgb(00,00,00)'},
+  {x: 7, y: 12, l: 4, colour: 'rgb(17,134,00)'},
+  {x: 14, y: 12, l: 1, colour: 'rgb(17,134,00)'},
+
+  {x: 3, y: 13, l: 12, colour: 'rgb(00,00,00)'},
+  {x: 4, y: 13, l: 2, colour: 'rgb(17,134,00)'},
+  {x: 7, y: 13, l: 4, colour: 'rgb(17,134,00)'},
+  {x: 12, y: 13, l: 2, colour: 'rgb(17,134,00)'},
+
+  {x: 2, y: 14, l: 14, colour: 'rgb(00,00,00)'},
+  {x: 3, y: 14, l: 3, colour: 'rgb(17,134,00)'},
+  {x: 7, y: 14, l: 4, colour: 'rgb(17,134,00)'},
+  {x: 12, y: 14, l: 3, colour: 'rgb(17,134,00)'},
+
+  {x: 2, y: 15, l: 14, colour: 'rgb(00,00,00)'},]
 // Mutable state
 let state = initialState()
 
@@ -380,8 +442,10 @@ const draw = () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
   } else {
     // draw snake
-    ctx.fillStyle = 'rgb(255,255,0)'
-    ctx.fillRect(x(state.snake[0].x), y(state.snake[0].y), x(1), y(1))
+    SNAKE.map(p => {
+        ctx.fillStyle = p.colour
+        ctx.fillRect(xg(state.snake[0])(p), yg(state.snake[0])(p), x(p.l/BITS), y(1/BITS))
+        })}
   }
 }
 
