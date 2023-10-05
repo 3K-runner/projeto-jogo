@@ -414,7 +414,7 @@ const draw = () => {
       ctx.fillRect(xg(state.snake[0])(p), yg(state.snake[0])(p), x(p.l/BITS), y(1/BITS))
     })
   }
-
+}
 // Game loop update
 const step = t1 => t2 => {
   if (t2 - t1 > 100) {
