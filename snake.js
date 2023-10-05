@@ -258,7 +258,7 @@ const initialState = () => ({
   apple: FRUITS,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
-  timebirds: 0
+  timebirds: 0,
   timegame:  0
 })
 
@@ -269,7 +269,7 @@ const eatenState = state => ({
   apple: state.apple,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
-  timebirds: 0
+  timebirds: 0,
   timegame:  (state.timegame + 1)
 })
 
@@ -283,7 +283,7 @@ const next = state => state.snake.length == 0
       apple: nextApple(state),
       pecks: nextPecks(state),
       birds: nextBirds(state),
-      timebirds: (state.timebirds + 1)
+      timebirds: (state.timebirds + 1),
       timegame:  (state.timegame + 1)
 }))
 
