@@ -426,7 +426,7 @@ const draw = () => {
 }
 // Game loop update
 const step = t1 => t2 => {
-  if (t2 - t1 > 100) {
+  if (t2 - t1 > 300) {
     state = next(state)
     draw()
     window.requestAnimationFrame(step(t2))
