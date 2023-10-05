@@ -382,11 +382,13 @@ const draw = () => {
     ctx.fillStyle = 'rgb(0,255,0)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
   } else {
-    // draw snake
-    APPLE.map(p => {
-      ctx.fillStyle = p.colour
-      ctx.fillRect(xg(state.snake[0])(p), yg(state.snake[0])(p), x(p.l/BITS), y(1/BITS))
-    })
+    // draw apples
+    state.apple.map(p1 => {
+      APPLE.map(p2 => {
+        ctx.fillStyle = p.colour
+        ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      })
+    }
   }
  
   // draw Birds
