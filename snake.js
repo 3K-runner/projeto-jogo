@@ -217,8 +217,12 @@ const nextSnake = state => willCrash(state)
 
 const nextBird1 = state => nextBeak(state)(0)(nextPeck1(state));
 const nextBird2 = state => nextBeak(state)(1)(nextPeck2(state));
-const nextBird3 = state => nextBeak(state)(2)(nextPeck3(state));
-const nextBird4 = state => nextBeak(state)(3)(nextPeck4(state));
+const nextBird3 = state => (state.timebirds >= 10) 
+  ? nextBeak(state)(2)(nextPeck3(state))
+  : state.birds[2]
+const nextBird4 = state => (state.timebirds >= 20) 
+  ? nextBeak(state)(3)(nextPeck4(state))
+  : state.birds[3]
 
 const nextBirds = state => pointEq(state.moves[0])(STOP) 
    ? state.birds
@@ -239,7 +243,8 @@ const initialState = () => ({
   snake: [START],
   apple: FRUITS,
   pecks: [STOP, STOP, STOP, STOP],
-  birds: STARTBIRDS
+  birds: STARTBIRDS,
+  timebirds: 0
 })
 
 // Bird eats snake state
@@ -248,7 +253,8 @@ const eatenState = state => ({
   snake: [START],
   apple: state.apple,
   pecks: [STOP, STOP, STOP, STOP],
-  birds: STARTBIRDS
+  birds: STARTBIRDS,
+  timebirds: 0
 })
 
 const next = state => state.snake.length == 0 
@@ -260,7 +266,8 @@ const next = state => state.snake.length == 0
       snake: nextSnake(state),
       apple: nextApple(state),
       pecks: nextPecks(state),
-      birds: nextBirds(state)
+      birds: nextBirds(state),
+      timebirds: (state.timebirds + 1)
 }))
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
