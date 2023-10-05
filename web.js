@@ -140,7 +140,15 @@ const SECY = [
 {x: 4, y:15, l: 1, colour: 'rgb(0,0,0)'},
 {x: 6, y:15, l: 1, colour: 'rgb(0,0,0)'},
 {x: 9, y:15, l: 1, colour: 'rgb(0,0,0)'},
-{x:11, y:15, l: 1, colour: 'rgb(0,0,0)'}]
+{x:11, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x: 4, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x: 6, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x: 9, y:15, l: 1, colour: 'rgb(0,0,0)'},
+{x: 3, y: 7, l:1, colour: 'rgb(0,0,0)'},
+{x: 3, y: 8, l:1, colour: 'rgb(0,0,0)'},
+{x: 3, y: 9, l:1, colour: 'rgb(0,0,0)'},
+{x: 3, y: 10, l:1, colour: 'rgb(0,0,0)'},
+]
 
 const EAGLE = [
 {x: 4, y: 1, l: 1, colour: 'rgb(00,00,00)'},
@@ -390,34 +398,38 @@ const OWL = [{x: 5, y: 2, l: 6, colour: 'rgb(00,00,00)'},
   {x: 2, y: 15, l: 14, colour: 'rgb(00,00,00)'},]
 
 const APPLE = [
-  {x: 8, y: 3, l: 1, colour: 'rgb(77,189,00))}'},
-  {x: 8, y: 4, l: 2, colour: 'rgb(77,189,00))}'},
-  {x: 7, y: 5, l: 2, colour: 'rgb(77,189,00))}'},
+  {x: 8, y: 3, l: 1, colour: 'rgb(77,189,00)'},
+  {x: 8, y: 4, l: 2, colour: 'rgb(77,189,00)'},
+  {x: 7, y: 5, l: 2, colour: 'rgb(77,189,00)'},
 
-  {x: 5, y: 6, l: 6, colour: 'rgb(0,0,00))}'},
-  {x: 7, y: 6, l: 2, colour: 'rgb(255,0,00))}'},
+  {x: 5, y: 6, l: 6, colour: 'rgb(0,0,00)'},
+  {x: 7, y: 6, l: 2, colour: 'rgb(255,0,00)'},
+  {x: 7, y: 6, l: 2, colour: 'rgb(77,189,00)'},
 
-  {x: 4, y: 7, l: 8, colour: 'rgb(0,0,00))}'},
-  {x: 5, y: 7, l: 6, colour: 'rgb(255,0,00))}'},
-  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00))}'},
+  {x: 4, y: 7, l: 8, colour: 'rgb(0,0,0)}'},
+  {x: 5, y: 7, l: 6, colour: 'rgb(255,0,00)'},
+  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00)'},
 
-  {x: 3, y: 8, l: 10, colour: 'rgb(0,0,00))}'},
-  {x: 4, y: 8, l: 8, colour: 'rgb(255,0,00))}'},
-  {x: 3, y: 9, l: 10, colour: 'rgb(0,0,00))}'},
-  {x: 4, y: 9, l: 8, colour: 'rgb(255,0,00))}'},
-  {x: 3, y: 10, l: 10, colour: 'rgb(0,0,00))}'},
-  {x: 4, y: 10, l: 8, colour: 'rgb(255,0,00))}'},
-  {x: 3, y: 11, l: 10, colour: 'rgb(0,0,00))}'},
-  {x: 4, y: 11, l: 8, colour: 'rgb(255,0,00))}'},
+  {x: 4, y: 7, l: 1, colour: 'rgb(0,0,00)'},
+  {x: 11, y: 7, l: 1, colour: 'rgb(0,0,00)'},
 
-  {x: 4, y: 12, l: 8, colour: 'rgb(0,0,00))}'},
-  {x: 5, y: 12, l: 6, colour: 'rgb(255,0,00))}'},
-  {x: 4, y: 13, l: 8, colour: 'rgb(0,0,00))}'},
-  {x: 5, y: 13, l: 6, colour: 'rgb(255,0,00))}'},
-  {x: 7, y: 13, l: 2, colour: 'rgb(0,0,00))}'},
+  {x: 3, y: 8, l: 10, colour: 'rgb(0,0,00)'},
+  {x: 4, y: 8, l: 8, colour: 'rgb(255,0,00)'},
+  {x: 3, y: 9, l: 10, colour: 'rgb(0,0,00)'},
+  {x: 4, y: 9, l: 8, colour: 'rgb(255,0,00)'},
+  {x: 3, y: 10, l: 10, colour: 'rgb(0,0,00)'},
+  {x: 4, y: 10, l: 8, colour: 'rgb(255,0,00)'},
+  {x: 3, y: 11, l: 10, colour: 'rgb(0,0,00)'},
+  {x: 4, y: 11, l: 8, colour: 'rgb(255,0,00)'},
 
-  {x: 5, y: 14, l: 2, colour: 'rgb(0,0,00))}'},
-  {x: 9, y: 14, l: 2, colour: 'rgb(0,0,00))}'}]
+  {x: 4, y: 12, l: 8, colour: 'rgb(0,0,00)'},
+  {x: 5, y: 12, l: 6, colour: 'rgb(255,0,00)'},
+  {x: 4, y: 13, l: 8, colour: 'rgb(0,0,00)'},
+  {x: 5, y: 13, l: 6, colour: 'rgb(255,0,00)'},
+  {x: 7, y: 13, l: 2, colour: 'rgb(0,0,00)'},
+
+  {x: 5, y: 14, l: 2, colour: 'rgb(0,0,00)'},
+  {x: 9, y: 14, l: 2, colour: 'rgb(0,0,00)'}]
 // Mutable state
 let state = initialState()
 
@@ -434,17 +446,19 @@ const yg = br => r => y(br.y + r.y/BITS)
 // Game loop draw
 const draw = () => {
   // clear
-  ctx.fillStyle = '#232323'
+  ctx.fillStyle = 'rgb(96, 64, 32)'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   
   // draw maze
-  ctx.fillStyle = 'rgb(0,50,255)'
+  ctx.fillStyle = 'rgb(39,97,28)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
 
   // draw apples
-  ctx.fillStyle = 'rgb(255,50,0)'
-  state.apple.map(p => ctx.fillRect(x(p.x + 1/4), y(p.y + 1/4), x(1/2), y(1/2)))
-
+  APPLE.map(p => {
+    ctx.fillStyle = p.colour
+    ctx.fillRect(xg(state.apple[0])(p), yg(state.apple[0])(p), x(p.l/BITS), y(1/BITS))
+    })
+ 
   // draw Birds
   EAGLE.map(p => {
     ctx.fillStyle = p.colour
@@ -477,7 +491,6 @@ const draw = () => {
         ctx.fillRect(xg(state.snake[0])(p), yg(state.snake[0])(p), x(p.l/BITS), y(1/BITS))
         })}
   }
-}
 
 // Game loop update
 const step = t1 => t2 => {
