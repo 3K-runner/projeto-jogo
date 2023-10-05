@@ -388,7 +388,7 @@ const draw = () => {
         ctx.fillStyle = p.colour
         ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
       })
-    }
+    })
   }
  
   // draw Birds
