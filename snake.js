@@ -121,8 +121,14 @@ const nextPeck1 = state => {
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
   const optionsPeck2 = optionsPeck1.filter(p => notOpositeMove(state)(0)(p))
   const optionsPeck3 = optionsPeck2 .filter(p => avoidMazeB(state)(0)(p));
-  const optionsPeck4 = orderMoves(optionsPeck3)(state.snake[0])(state.birds[0]);
-// Escape deadends
+
+  const target = ((Math.trunc(state.timegame / 20) % 2) == 0) 
+    ? ({ x:19, y:-3 })
+    : state.snake[0]
+
+  const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.birds[0]);
+
+  // Escape deadends
   if (optionsPeck4.length === 0) {
     return ({ x: 0 - state.pecks[0].x, y: 0 - state.pecks[0].y });
   }
@@ -132,10 +138,12 @@ const nextPeck2 = state => {
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
   const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(1)(p));
   const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(1)(p));
-  const target =
-      pointEq(state.moves[0])(NORTH)
+
+  const target = ((Math.trunc(state.timegame / 20) % 2) == 0)
+    ? ({ x:19, y:16 })
+    : (pointEq(state.moves[0])(NORTH)
       ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
-      :  ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)});
+      : ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)}));
 
   const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.birds[1]);
 
@@ -160,9 +168,9 @@ const nextPeck3 = state => {
   // Calculates the distance
   const radiusPeck = distance(state.snake[0])(state.birds[2])
   // Choice of target based on the genral movement rule
-  const target = (radiusPeck <= 10) 
-     ? ({ x: 0, y:16 })
-     : state.snake[0]
+  const target = (((Math.trunc(state.timegame / 20) % 2) == 0) || (radiusPeck <= 10)) 
+    ? ({ x: 0, y:16 })
+    : state.snake[0]
   
   // Prioritizes movements based on the target
   const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.birds[2])
@@ -182,8 +190,12 @@ const nextPeck4 = state => {
   const target3 = ({x: (2 * target1.x - target2.x),
                     y: (2 * target1.y - target2.y)
   })
+  
+  const target = ((Math.trunc(state.timegame / 20) % 2) == 0)
+    ? ({ x: 0, y:-3 })
+    : target3
 
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target3)(state.birds[3])
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.birds[3])
   // Escape deadends
   if(optionsPeck4.length == 0){
      return ({ x: 0 - state.pecks[3].x, y: 0 - state.pecks[3].y });
@@ -216,11 +228,13 @@ const nextSnake = state => willCrash(state)
       : state.snake) 
 
 const nextBird1 = state => nextBeak(state)(0)(nextPeck1(state));
-const nextBird2 = state => nextBeak(state)(1)(nextPeck2(state));
-const nextBird3 = state => (state.timebirds >= 10) 
+const nextBird2 = state => (state.timebirds >= 10)
+  ? nextBeak(state)(1)(nextPeck2(state))
+  : state.birds[1]
+const nextBird3 = state => (state.timebirds >= 20) 
   ? nextBeak(state)(2)(nextPeck3(state))
   : state.birds[2]
-const nextBird4 = state => (state.timebirds >= 20) 
+const nextBird4 = state => (state.timebirds >= 30) 
   ? nextBeak(state)(3)(nextPeck4(state))
   : state.birds[3]
 
@@ -245,6 +259,7 @@ const initialState = () => ({
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0
+  timegame:  0
 })
 
 // Bird eats snake state
@@ -255,6 +270,7 @@ const eatenState = state => ({
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0
+  timegame:  (state.timegame + 1)
 })
 
 const next = state => state.snake.length == 0 
@@ -268,6 +284,7 @@ const next = state => state.snake.length == 0
       pecks: nextPecks(state),
       birds: nextBirds(state),
       timebirds: (state.timebirds + 1)
+      timegame:  (state.timegame + 1)
 }))
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
