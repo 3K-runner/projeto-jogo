@@ -303,11 +303,11 @@ const SNAKE = [
   {x:13, y:10, l: 3, colour: 'rgb(00,00,00)'},
   {x:14, y:10, l: 1, colour: 'rgb(17,134,00)'},
 
-  {x: 3, y:10, l:12, colour: 'rgb(00,00,00)'},
-  {x: 6, y:10, l: 4, colour: 'rgb(17,134,00)'},
-  {x:13, y:10, l: 1, colour: 'rgb(17,134,00)'},
+  {x: 3, y:11, l:12, colour: 'rgb(00,00,00)'},
+  {x: 6, y:11, l: 4, colour: 'rgb(17,134,00)'},
+  {x:13, y:11, l: 1, colour: 'rgb(17,134,00)'},
 
-  {x: 2, y:12, l:14, colour: 'rgb(00,00,00)'},
+  {x: 2, y:12, l:12, colour: 'rgb(00,00,00)'},
   {x: 3, y:12, l: 2, colour: 'rgb(17,134,00)'},
   {x: 6, y:12, l: 4, colour: 'rgb(17,134,00)'},
   {x:11, y:12, l: 2, colour: 'rgb(17,134,00)'},
@@ -329,7 +329,7 @@ const APPLE = [
   {x: 8, y: 4, l: 2, colour: 'rgb(77,189,00)'},
   {x: 7, y: 5, l: 2, colour: 'rgb(77,189,00)'},
 
-  {x: 5, y: 6, l: 6, colour: 'rgb(0,0,00)'},
+  {x: 5, y: 6, l: 6, colour: 'rgb(00,00,00)'},
   {x: 7, y: 6, l: 2, colour: 'rgb(77,189,00)'},
 
   {x: 4, y: 7, l: 8, colour: 'rgb(0,0,0)}'},
