@@ -388,6 +388,36 @@ const OWL = [{x: 5, y: 2, l: 6, colour: 'rgb(00,00,00)'},
   {x: 12, y: 14, l: 3, colour: 'rgb(17,134,00)'},
 
   {x: 2, y: 15, l: 14, colour: 'rgb(00,00,00)'},]
+
+const APPLE = [
+  {x: 8, y: 3, l: 1, colour: 'rgb(77,189,00))}'},
+  {x: 8, y: 4, l: 2, colour: 'rgb(77,189,00))}'},
+  {x: 7, y: 5, l: 2, colour: 'rgb(77,189,00))}'},
+
+  {x: 5, y: 6, l: 6, colour: 'rgb(0,0,00))}'},
+  {x: 7, y: 6, l: 2, colour: 'rgb(255,0,00))}'},
+
+  {x: 4, y: 7, l: 8, colour: 'rgb(0,0,00))}'},
+  {x: 5, y: 7, l: 6, colour: 'rgb(255,0,00))}'},
+  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00))}'},
+
+  {x: 3, y: 8, l: 10, colour: 'rgb(0,0,00))}'},
+  {x: 4, y: 8, l: 8, colour: 'rgb(255,0,00))}'},
+  {x: 3, y: 9, l: 10, colour: 'rgb(0,0,00))}'},
+  {x: 4, y: 9, l: 8, colour: 'rgb(255,0,00))}'},
+  {x: 3, y: 10, l: 10, colour: 'rgb(0,0,00))}'},
+  {x: 4, y: 10, l: 8, colour: 'rgb(255,0,00))}'},
+  {x: 3, y: 11, l: 10, colour: 'rgb(0,0,00))}'},
+  {x: 4, y: 11, l: 8, colour: 'rgb(255,0,00))}'},
+
+  {x: 4, y: 12, l: 8, colour: 'rgb(0,0,00))}'},
+  {x: 5, y: 12, l: 6, colour: 'rgb(255,0,00))}'},
+  {x: 4, y: 13, l: 8, colour: 'rgb(0,0,00))}'},
+  {x: 5, y: 13, l: 6, colour: 'rgb(255,0,00))}'},
+  {x: 7, y: 13, l: 2, colour: 'rgb(0,0,00))}'},
+
+  {x: 5, y: 14, l: 2, colour: 'rgb(0,0,00))}'},
+  {x: 9, y: 14, l: 2, colour: 'rgb(0,0,00))}'}]
 // Mutable state
 let state = initialState()
 
