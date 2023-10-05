@@ -376,11 +376,18 @@ const draw = () => {
   ctx.fillStyle = 'rgb(39,97,28)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
 
-  // draw apples
-  APPLE.map(p => {
-    ctx.fillStyle = p.colour
-    ctx.fillRect(xg(state.apple[0])(p), yg(state.apple[0])(p), x(p.l/BITS), y(1/BITS))
-  })
+ // add win
+  if (state.apple.length == 0){
+    // If all apples have been collected, the screen flashes green
+    ctx.fillStyle = 'rgb(0,255,0)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+  } else {
+    // draw snake
+    APPLE.map(p => {
+      ctx.fillStyle = p.colour
+      ctx.fillRect(xg(state.snake[0])(p), yg(state.snake[0])(p), x(p.l/BITS), y(1/BITS))
+    })
+  }
  
   // draw Birds
   EAGLE.map(p => {
