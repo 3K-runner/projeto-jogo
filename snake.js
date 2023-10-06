@@ -246,7 +246,7 @@ const nextBirds = state => pointEq(state.moves[0])(STOP)
       nextBird4(state)]
    
 // Randomness
-const rndPos = table => ({
+const rndPos = () => ({
   x: rnd(0)(COLS - 1),
   y: rnd(0)(ROWS - 1)
 })
@@ -259,7 +259,8 @@ const initialState = () => ({
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0,
-  timegame:  0
+  timegame:  0,
+  lives: 3, // Add lives
 })
 
 // Bird eats snake state
@@ -270,22 +271,27 @@ const eatenState = state => ({
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0,
-  timegame:  (state.timegame + 1)
+  timegame:  (state.timegame + 1),
+  ives: state.lives - 1, // remove life
 })
 
-const next = state => state.snake.length == 0 
-   ? eatenState(state)
-   : (state.apple.length == 0
-      ? initialState()
-      : ({
-      moves: nextMoves(state),
-      snake: nextSnake(state),
-      apple: nextApple(state),
-      pecks: nextPecks(state),
-      birds: nextBirds(state),
-      timebirds: (state.timebirds + 1),
-      timegame:  (state.timegame + 1)
-}))
+const next = state => 
+  state.snake.length == 0
+    ? state.lives > 0 //Check life
+      ? eatenState({ ...state, lives: state.lives - 1 }) //shortens life
+      : initialState() 
+    : state.apple.length == 0 
+      ? initialState() 
+      : {
+          moves: nextMoves(state),
+          snake: nextSnake(state),
+          apple: nextApple(state),
+          pecks: nextPecks(state),
+          birds: nextBirds(state),
+          timebirds: (state.timebirds + 1),
+          timegame:  (state.timegame + 1),
+          lives: state.lives,
+        };
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
   : state
