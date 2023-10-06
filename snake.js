@@ -116,53 +116,49 @@ const notOpositeMove = state => i => peck =>
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
 
-const nextPeck1 = state => {
+const chosenPeck = target => state => i => {
+  // Preference for anti-clockwise movement,
+  // giving highest priority to NORTH
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
-  const optionsPeck2 = optionsPeck1.filter(p => notOpositeMove(state)(0)(p))
-  const optionsPeck3 = optionsPeck2 .filter(p => avoidMazeB(state)(0)(p));
+  // Avoids turning around (180)
+  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(i)(p))
+  // Does not hit the maze walls
+  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(i)(p));
+  
+  // Orders the movements according to 
+  // the distance from the bird to the target
+  // From closest to furthest
+  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.birds[i]);
 
+  // Escape deadends
+  if (optionsPeck4.length === 0) {
+    return ({ x: 0 - state.pecks[i].x, y: 0 - state.pecks[i].y });
+  }
+  
+  // Returns "best" move
+  return optionsPeck4[0];
+}
+
+const nextPeck1 = state => {
   const target = ((Math.trunc(state.timegame / 20) % 2) == 0) 
     ? ({ x:19, y:-3 })
     : state.snake[0]
 
-  const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.birds[0]);
-
-  // Escape deadends
-  if (optionsPeck4.length === 0) {
-    return ({ x: 0 - state.pecks[0].x, y: 0 - state.pecks[0].y });
-  }
-  return optionsPeck4[0];
+  return chosenPeck(target)(state)(0);
 };
 const nextPeck2 = state => {
-  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
-  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(1)(p));
-  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(1)(p));
-
   const target = ((Math.trunc(state.timegame / 20) % 2) == 0)
     ? ({ x:19, y:16 })
     : (pointEq(state.moves[0])(NORTH)
       ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
       : ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)}));
 
-  const optionsPeck4 = orderMoves(optionsPeck3)(target)(state.birds[1]);
-
-  // Escape deadends
-  if (optionsPeck4.length == 0) {
-    return ({ x: 0 - state.pecks[1].x, y: 0 - state.pecks[1].y });
-  }
-  return optionsPeck4[0];
+  return chosenPeck(target)(state)(1);
 }
 const nextPeck3 = state => {
   // General movement rule:
   //   Goes after the snake if distant,
   //   but goes to the bottom left corner if close
-
-  // Preference for anti-clockwise movement
-  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST]
-  // Avoids turning around
-  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(2)(p))
-  // Does not hit the maze walls
-  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(2)(p))
 
   // Calculates the distance
   const radiusPeck = distance(state.snake[0])(state.birds[2])
@@ -171,19 +167,9 @@ const nextPeck3 = state => {
     ? ({ x: 0, y:16 })
     : state.snake[0]
   
-  // Prioritizes movements based on the target
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.birds[2])
-  // Escape deadends
-  if(optionsPeck4.length == 0){
-     return ({ x: 0 - state.pecks[2].x, y: 0 - state.pecks[2].y });
-  }
-  return optionsPeck4[0];
+  return chosenPeck(target)(state)(2);
 }
 const nextPeck4 = state => {
-  const optionsPeck1 = [NORTH, WEST, SOUTH, EAST]
-  const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(3)(p))
-  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(3)(p))
-
   const target1 = nextHead(state)
   const target2 = state.birds[0]
   const target3 = ({x: (2 * target1.x - target2.x),
@@ -194,12 +180,7 @@ const nextPeck4 = state => {
     ? ({ x: 0, y:-3 })
     : target3
 
-  const optionsPeck4 = orderMoves([...optionsPeck3])(target)(state.birds[3])
-  // Escape deadends
-  if(optionsPeck4.length == 0){
-     return ({ x: 0 - state.pecks[3].x, y: 0 - state.pecks[3].y });
-  }
-  return optionsPeck4[0];
+  return chosenPeck(target)(state)(3);
 }
 
 const nextPecks = state => [nextPeck1(state),
