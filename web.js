@@ -684,7 +684,7 @@ const APPLE = [
   {x: 5, y: 6, l: 6, colour: 'rgb(00,00,00)'},
   {x: 7, y: 6, l: 2, colour: 'rgb(77,189,00)'},
 
-  {x: 4, y: 7, l: 8, colour: 'rgb(0,0,0)}'},
+  {x: 4, y: 7, l: 8, colour: 'rgb(0,0,0)'},
   {x: 5, y: 7, l: 6, colour: 'rgb(255,0,00)'},
   {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00)'},
 
@@ -778,7 +778,7 @@ const draw = () => {
 }
 // Game loop update
 const step = t1 => t2 => {
-  if (t2 - t1 > 300) {
+  if (t2 - t1 > 200) {
     state = next(state)
     draw()
     window.requestAnimationFrame(step(t2))
