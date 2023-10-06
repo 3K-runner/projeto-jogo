@@ -295,8 +295,8 @@ const next = state => state.snake.length == 0
         apple: nextApple(state),
         pecks: nextPecks(state),
         birds: nextBirds(state),
-        timebirds: nextTimeBirds(stage),
-        timegame:  nextTimeGame(stage),
+        timebirds: nextTimeBirds(state),
+        timegame:  nextTimeGame(state),
         lives: state.lives,
        }));
 
