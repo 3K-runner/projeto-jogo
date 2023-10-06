@@ -791,7 +791,7 @@ const draw = () => {
   }
 
   // add win
-  if (state.apple.length == 0){
+  if ((state.apple.length == 0) && (state.eggs.lenght == 0)){
     // If all apples have been collected, the screen flashes green
     ctx.fillStyle = 'rgb(0,255,0)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
