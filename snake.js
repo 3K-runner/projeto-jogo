@@ -110,9 +110,7 @@ const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
 const willCrash = state => (state.birds.some(pointEq(nextHead(state)))) || (state.birds.some(pointEq(state.snake[0])))
 const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
 const avoidMazeB = state => i => peck => WALLS.some(pointEq(nextBeak(state)(i)(peck))) ? false : true
-
-
-const notOpositeMove = state => i=> peck =>
+const notOpositeMove = state => i => peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
@@ -238,14 +236,24 @@ const nextBird4 = state => (state.timebirds >= 30)
   ? nextBeak(state)(3)(nextPeck4(state))
   : state.birds[3]
 
-const nextBirds = state => pointEq(state.moves[0])(STOP) 
-   ? state.birds
-   : [nextBird1(state), 
-      nextBird2(state),
-      nextBird3(state),
-      nextBird4(state)]
-   
-// Randomness
+const nextBirds = state => pointEq(state.moves[0])(STOP)
+  //At the beginning of a stage, 
+  //the birds only start moving after the snake moves
+  ? state.birds
+  : [nextBird1(state), 
+     nextBird2(state),
+     nextBird3(state),
+     nextBird4(state)]
+
+const nextTimeBirds = state => pointEq(state.moves[0])(STOP)
+  ? state.timebirds
+  : (state.timebirds + 1)
+
+const nextTimeGame = state => pointEq(state.moves[0])(STOP)
+  ? state.timegame
+  : (state.timegame + 1)
+
+// Returns a random position (rnd pos)
 const rndPos = () => ({
   x: rnd(0)(COLS - 1),
   y: rnd(0)(ROWS - 1)
@@ -271,27 +279,26 @@ const eatenState = state => ({
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0,
-  timegame:  (state.timegame + 1),
-  ives: state.lives - 1, // remove life
+  timegame: state.timegame,
+  lives: (state.lives - 1), // remove life
 })
 
-const next = state => 
-  state.snake.length == 0
-    ? state.lives > 0 //Check life
-      ? eatenState({ ...state, lives: state.lives - 1 }) //shortens life
-      : initialState() 
-    : state.apple.length == 0 
-      ? initialState() 
-      : {
-          moves: nextMoves(state),
-          snake: nextSnake(state),
-          apple: nextApple(state),
-          pecks: nextPecks(state),
-          birds: nextBirds(state),
-          timebirds: (state.timebirds + 1),
-          timegame:  (state.timegame + 1),
-          lives: state.lives,
-        };
+const next = state => state.snake.length == 0
+  ? (state.lives > 0    //Check life
+    ? eatenState(state) //shortens life
+    : initialState())   //Reset game
+  : (state.apple.length == 0 
+    ? initialState() 
+    : ({
+        moves: nextMoves(state),
+        snake: nextSnake(state),
+        apple: nextApple(state),
+        pecks: nextPecks(state),
+        birds: nextBirds(state),
+        timebirds: nextTimeBirds(stage),
+        timegame:  nextTimeGame(stage),
+        lives: state.lives,
+       }));
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
   : state
