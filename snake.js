@@ -287,7 +287,7 @@ const nextFrightened = state => eggEaten(state)
      nextFright(state)(3)]
 
 // Returns a random position (rnd pos)
-const rndPos = () => ({
+const randomPosition = () => ({
   x: rnd(0)(COLS - 1),
   y: rnd(0)(ROWS - 1)
 })
