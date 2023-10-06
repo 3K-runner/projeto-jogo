@@ -115,6 +115,7 @@ const notOpositeMove = state => i => peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
+const nextLives = state => (state.lives.length > 1) ? dropFirst(state.lives) : state.lives
 
 const chosenPeck = target => state => i => {
   // Preference for anti-clockwise movement,
@@ -250,7 +251,7 @@ const initialState = () => ({
   birds: STARTBIRDS,
   timebirds: 0,
   timegame:  0,
-  lives: 3, // Add lives
+  lives: [1, 2, 3], // Add lives
 })
 
 // Bird eats snake state
@@ -262,25 +263,25 @@ const eatenState = state => ({
   birds: STARTBIRDS,
   timebirds: 0,
   timegame: state.timegame,
-  lives: (state.lives - 1), // remove life
+  lives: nextLives(state), // remove life
 })
 
 const next = state => state.snake.length == 0
-  ? (state.lives > 0    //Check life
-    ? eatenState(state) //shortens life
-    : initialState())   //Reset game
-  : (state.apple.length == 0 
-    ? initialState() 
-    : ({
+    ? state.lives.length > 1 //Check array of lives
+      ? eatenState(state) //shortens life
+      : initialState() //Reset game
+    : state.apple.length == 0
+    ? initialState()
+    : {
         moves: nextMoves(state),
         snake: nextSnake(state),
         apple: nextApple(state),
         pecks: nextPecks(state),
         birds: nextBirds(state),
         timebirds: nextTimeBirds(state),
-        timegame:  nextTimeGame(state),
+        timegame: nextTimeGame(state),
         lives: state.lives,
-       }));
+      };
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
   : state
