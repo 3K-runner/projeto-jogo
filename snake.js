@@ -95,8 +95,13 @@ const WALLS  = [{ x: 0, y: 0 }, { x: 1, y: 0 },
                 { x:14, y:13 }, { x:15, y:13 },
                 { x:16, y:13 }, { x:17, y:13 },
                 { x:18, y:13 }, { x:19, y:13 }]
+
 const FRUITS = [{ x: 1, y: 1 }, { x:10, y: 1 }, 
                 { x:16, y: 1 }, { x:18, y: 1 }]
+                
+const STARTEGGS = [{ x: 1, y: 4 }, { x: 1, y:10 }, 
+                   { x:18, y: 4 }, { x:18, y:10 }]
+
 const START  = { x: 9, y: 8 } // Starting position
 const STARTBIRDS = [{ x: 8, y: 6 }, 
                     { x: 9, y: 6 }, 
@@ -108,11 +113,23 @@ const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
 
 // Booleans
 const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
-const willCrash = state => (state.birds.some(pointEq(nextHead(state)))) || (state.birds.some(pointEq(state.snake[0])))
+const willCrash = state => 
+  (state.birds.some((p, i) => isFrightened(state)(i) 
+    ? false
+    : pointEq(nextHead(state))(p))
+  ) 
+  || 
+  (state.birds.some((p, i) => isFrightened(state)(i) 
+    ? false
+    : pointEq(state.snake[0])(p))
+  )
+const birdWillBeEaten = state => i => (pointEq(nextHead(state))(state.birds[i])) || (pointEq(state.snake[0])(state.birds[i]))
 const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
 const avoidMazeB = state => i => peck => WALLS.some(pointEq(nextBeak(state)(i)(peck))) ? false : true
 const notOpositeMove = state => i => peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
+const frightMode   = state => state.frightened.some(p => (p != 0)) 
+const isFrightened = state => i => (state.frightened[i] != 0) ? true : false
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
 const nextLives = state => (state.lives.length > 1) ? dropFirst(state.lives) : state.lives
@@ -141,18 +158,22 @@ const chosenPeck = target => state => i => {
 }
 
 const nextPeck1 = state => {
-  const target = ((Math.trunc(state.timegame / 20) % 2) == 0) 
-    ? ({ x:19, y:-3 })
-    : state.snake[0]
+  const target = isFrightened(state)(0)
+    ? randomPosition()
+    : (((Math.trunc(state.timegame / 20) % 2) == 0) 
+      ? ({ x:19, y:-3 })
+      : state.snake[0])
 
   return chosenPeck(target)(state)(0);
 };
 const nextPeck2 = state => {
-  const target = ((Math.trunc(state.timegame / 20) % 2) == 0)
-    ? ({ x:19, y:16 })
-    : (pointEq(state.moves[0])(NORTH)
-      ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
-      : ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)}));
+  const target = isFrightened(state)(1)
+    ? randomPosition()
+    : (((Math.trunc(state.timegame / 20) % 2) == 0)
+      ? ({ x:19, y:16 })
+      : (pointEq(state.moves[0])(NORTH)
+        ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
+        : ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)})));
 
   return chosenPeck(target)(state)(1);
 }
@@ -164,9 +185,11 @@ const nextPeck3 = state => {
   // Calculates the distance
   const radiusPeck = distance(state.snake[0])(state.birds[2])
   // Choice of target based on the genral movement rule
-  const target = (((Math.trunc(state.timegame / 20) % 2) == 0) || (radiusPeck <= 10)) 
-    ? ({ x: 0, y:16 })
-    : state.snake[0]
+  const target = isFrightened(state)(2)
+    ? randomPosition()
+    : ((((Math.trunc(state.timegame / 20) % 2) == 0) || (radiusPeck <= 10)) 
+      ? ({ x: 0, y:16 })
+      : state.snake[0])
   
   return chosenPeck(target)(state)(2);
 }
@@ -177,9 +200,11 @@ const nextPeck4 = state => {
                     y: (2 * target1.y - target2.y)
   })
   
-  const target = ((Math.trunc(state.timegame / 20) % 2) == 0)
-    ? ({ x: 0, y:-3 })
-    : target3
+  const target = isFrightened(state)(3)
+    ? randomPosition()
+    : (((Math.trunc(state.timegame / 20) % 2) == 0)
+      ? ({ x: 0, y:-3 })
+      : target3)
 
   return chosenPeck(target)(state)(3);
 }
@@ -190,6 +215,7 @@ const nextPecks = state => [nextPeck1(state),
                    nextPeck4(state)]
 
 const nextApple = state => state.apple.filter(wontEat(state))
+const nextEgg   = state => state.eggs.filter(wontEat(state))
 
 const nextHead  = state => ({
       x: mod(COLS)(state.snake[0].x + state.moves[0].x),
@@ -208,16 +234,24 @@ const nextSnake = state => willCrash(state)
       ? [nextHead(state)] 
       : state.snake) 
 
-const nextBird1 = state => nextBeak(state)(0)(nextPeck1(state));
-const nextBird2 = state => (state.timebirds >= 10)
-  ? nextBeak(state)(1)(nextPeck2(state))
-  : state.birds[1]
-const nextBird3 = state => (state.timebirds >= 20) 
+const nextBird1 = state => (isFrightened(state)(0) && birdWillBeEaten(state)(0))
+  ? STARTBIRDS[0]
+  : nextBeak(state)(0)(nextPeck1(state));
+const nextBird2 = state => (isFrightened(state)(1) && birdWillBeEaten(state)(1))
+  ? STARTBIRDS[1]
+  : ((state.timebirds >= 10)
+    ? nextBeak(state)(1)(nextPeck2(state))
+    : state.birds[1])
+const nextBird3 = state => (isFrightened(state)(2) && birdWillBeEaten(state)(2))
+  ? STARTBIRDS[2]
+  : ((state.timebirds >= 20) 
   ? nextBeak(state)(2)(nextPeck3(state))
-  : state.birds[2]
-const nextBird4 = state => (state.timebirds >= 30) 
+  : state.birds[2])
+const nextBird4 = state => (isFrightened(state)(3) && birdWillBeEaten(state)(3))
+  ? STARTBIRDS[3]
+  : ((state.timebirds >= 30) 
   ? nextBeak(state)(3)(nextPeck4(state))
-  : state.birds[3]
+  : state.birds[3])
 
 const nextBirds = state => pointEq(state.moves[0])(STOP)
   //At the beginning of a stage, 
@@ -236,6 +270,21 @@ const nextTimeGame = state => pointEq(state.moves[0])(STOP)
   ? state.timegame
   : (state.timegame + 1)
 
+const nextFright = state => i => isFrightened(state)(i)
+  ? (birdWillBeEaten(state)(i)
+    ? 0
+    : state.frightened[i])
+  : 0   
+const nextFrightened = state => eggEaten(state)
+  ? [state.timegame, 
+     state.timegame, 
+     state.timegame, 
+     state.timegame]
+  : [nextFright(state)(0), 
+     nextFright(state)(1), 
+     nextFright(state)(2), 
+     nextFright(state)(3)]
+
 // Returns a random position (rnd pos)
 const rndPos = () => ({
   x: rnd(0)(COLS - 1),
@@ -247,11 +296,13 @@ const initialState = () => ({
   moves: [STOP], 
   snake: [START],
   apple: FRUITS,
+  eggs:  STARTEGGS,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0,
   timegame:  0,
   lives: [1, 2, 3], // Add lives
+  frightened: [0, 0, 0, 0]
 })
 
 // Bird eats snake state
@@ -259,11 +310,13 @@ const eatenState = state => ({
   moves: [STOP], 
   snake: [START],
   apple: state.apple,
+  eggs:  state.eggs,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0,
   timegame: state.timegame,
   lives: nextLives(state), // remove life
+  frightened: [0, 0, 0, 0]
 })
 
 const next = state => state.snake.length == 0
@@ -276,11 +329,13 @@ const next = state => state.snake.length == 0
         moves: nextMoves(state),
         snake: nextSnake(state),
         apple: nextApple(state),
+        eggs:  nextEgg(state),
         pecks: nextPecks(state),
         birds: nextBirds(state),
         timebirds: nextTimeBirds(state),
         timegame: nextTimeGame(state),
         lives: state.lives,
+        frightened: nextFrightened(state) 
       };
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
