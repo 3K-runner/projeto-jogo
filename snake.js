@@ -95,7 +95,8 @@ const WALLS  = [{ x: 0, y: 0 }, { x: 1, y: 0 },
                 { x:14, y:13 }, { x:15, y:13 },
                 { x:16, y:13 }, { x:17, y:13 },
                 { x:18, y:13 }, { x:19, y:13 }]
-const FRUITS = [{ x:16, y: 1}]
+const FRUITS = [{ x: 1, y: 1 }, { x:10, y: 1 }, 
+                { x:16, y: 1 }, { x:18, y: 1 }]
 const START  = { x: 9, y: 8 } // Starting position
 const STARTBIRDS = [{ x: 8, y: 6 }, 
                     { x: 9, y: 6 }, 
