@@ -107,6 +107,9 @@ const STARTBIRDS = [{ x: 8, y: 6 },
                     { x: 9, y: 6 }, 
                     { x:10, y: 6 },
                     { x:11, y: 6 }]
+const LIFES = [{ x:20, y: 0 },
+               { x:20, y: 1 },
+               { x:20, y: 2 }]
 
 // Point operations
 const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y 
@@ -302,7 +305,7 @@ const initialState = () => ({
   birds: STARTBIRDS,
   timebirds: 0,
   timegame:  0,
-  lives: [1, 2, 3], // Add lives
+  lives: LIFES, // Add lives
   frightened: [0, 0, 0, 0]
 })
 
