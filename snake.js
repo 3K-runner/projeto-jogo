@@ -113,6 +113,7 @@ const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y
 
 // Booleans
 const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
+const eggEaten   = state => state.eggs.some(pointEq(nextHead(state))) ? true : false 
 const willCrash = state => 
   (state.birds.some((p, i) => isFrightened(state)(i) 
     ? false
