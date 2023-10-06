@@ -710,13 +710,8 @@ const draw = () => {
   // draw maze
   ctx.fillStyle = 'rgb(39,97,28)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
-
- // add win
-  if (state.apple.length == 0){
-    // If all apples have been collected, the screen flashes green
-    ctx.fillStyle = 'rgb(0,255,0)'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-  } else {
+  
+  if (state.apple.length != 0){
     // draw apples
     state.apple.map(p1 => {
       APPLE.map(p2 => {
@@ -725,27 +720,63 @@ const draw = () => {
       })
     })
   }
- 
+
+  if (state.eggs.length != 0){
+    // draw eggs
+    state.eggs.map(p1 => {
+      ctx.fillStyle = 'rgb(255,255,255)'
+      ctx.fillRect(x(p1.x), y(p1.y), x(1), y(1))
+      //EGG.map(p2 => {
+      //  ctx.fillStyle = p2.colour
+      //  ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      //})
+    })
+  }
+  
   // draw Birds
   EAGLE.map(p => {
     ctx.fillStyle = p.colour
     ctx.fillRect(xg(state.birds[0])(p), yg(state.birds[0])(p), x(p.l/BITS), y(1/BITS))
   })
+  if (isFrightened(state)(0)){
+    EAGLE.map(p => {
+      ctx.fillStyle = p.colour
+      ctx.fillRect(xg(state.birds[0])(p), yg(state.birds[0])(p), x(p.l/BITS), y(1/BITS))
+    })
+  }
   
   SECY.map(p => {
     ctx.fillStyle = p.colour
     ctx.fillRect(xg(state.birds[1])(p), yg(state.birds[1])(p), x(p.l/BITS), y(1/BITS))
   })
+  if (isFrightened(state)(1)){
+    EAGLE.map(p => {
+      ctx.fillStyle = p.colour
+      ctx.fillRect(xg(state.birds[1])(p), yg(state.birds[1])(p), x(p.l/BITS), y(1/BITS))
+    })
+  }
  
   GUINE.map(p => {
     ctx.fillStyle = p.colour
     ctx.fillRect(xg(state.birds[2])(p), yg(state.birds[2])(p), x(p.l/BITS), y(1/BITS))
   })
+  if (isFrightened(state)(2)){
+    EAGLE.map(p => {
+      ctx.fillStyle = p.colour
+      ctx.fillRect(xg(state.birds[2])(p), yg(state.birds[2])(p), x(p.l/BITS), y(1/BITS))
+    })
+  }
 
   OWL.map(p => {
     ctx.fillStyle = p.colour
     ctx.fillRect(xg(state.birds[3])(p), yg(state.birds[3])(p), x(p.l/BITS), y(1/BITS))
   })
+  if (isFrightened(state)(3)){
+    EAGLE.map(p => {
+      ctx.fillStyle = p.colour
+      ctx.fillRect(xg(state.birds[3])(p), yg(state.birds[3])(p), x(p.l/BITS), y(1/BITS))
+    })
+  }
 
   // add crash
   if (state.snake.length == 0){
@@ -757,6 +788,13 @@ const draw = () => {
       ctx.fillStyle = p.colour
       ctx.fillRect(xg(state.snake[0])(p), yg(state.snake[0])(p), x(p.l/BITS), y(1/BITS))
     })
+  }
+
+  // add win
+  if (state.apple.length == 0){
+    // If all apples have been collected, the screen flashes green
+    ctx.fillStyle = 'rgb(0,255,0)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
   }
 }
 // Game loop update
