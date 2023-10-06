@@ -133,7 +133,12 @@ const avoidMazeB = state => i => peck => WALLS.some(pointEq(nextBeak(state)(i)(p
 const notOpositeMove = state => i => peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
 const frightMode   = state => state.frightened.some(p => (p != 0)) 
-const isFrightened = state => i => (state.frightened[i] != 0) ? true : false
+const isFrightened = state => i => (state.frightened[i] != 0) 
+  ? ((state.timegame - state.frightened[i] >= 15)
+    ? false
+    : true)
+  : false
+const inScatterMode = state => ((Math.trunc(state.timegame / 20) % 2) == 0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
 const nextLives = state => (state.lives.length > 1) ? dropFirst(state.lives) : state.lives
@@ -164,7 +169,7 @@ const chosenPeck = target => state => i => {
 const nextPeck1 = state => {
   const target = isFrightened(state)(0)
     ? randomPosition()
-    : (((Math.trunc(state.timegame / 20) % 2) == 0) 
+    : (inScatterMode(state) 
       ? ({ x:19, y:-3 })
       : state.snake[0])
 
@@ -173,7 +178,7 @@ const nextPeck1 = state => {
 const nextPeck2 = state => {
   const target = isFrightened(state)(1)
     ? randomPosition()
-    : (((Math.trunc(state.timegame / 20) % 2) == 0)
+    : (inScatterMode(state)
       ? ({ x:19, y:16 })
       : (pointEq(state.moves[0])(NORTH)
         ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
@@ -191,7 +196,7 @@ const nextPeck3 = state => {
   // Choice of target based on the genral movement rule
   const target = isFrightened(state)(2)
     ? randomPosition()
-    : ((((Math.trunc(state.timegame / 20) % 2) == 0) || (radiusPeck <= 10)) 
+    : ((inScatterMode(state) || (radiusPeck <= 10)) 
       ? ({ x: 0, y:16 })
       : state.snake[0])
   
@@ -206,7 +211,7 @@ const nextPeck4 = state => {
   
   const target = isFrightened(state)(3)
     ? randomPosition()
-    : (((Math.trunc(state.timegame / 20) % 2) == 0)
+    : (inScatterMode(state)
       ? ({ x: 0, y:-3 })
       : target3)
 
@@ -232,43 +237,30 @@ const nextBeak  = state => i => move => ({
     })
 
 const nextSnake = state => willCrash(state)
-   ? [] 
-   : (avoidMaze(state) 
-     // Stops the snake when facing a wall
-      ? [nextHead(state)] 
-      : state.snake) 
+  ? [] 
+  : (avoidMaze(state) 
+    // Stops the snake when facing a wall
+     ? [nextHead(state)] 
+     : state.snake) 
 
-const nextBird1 = state => (isFrightened(state)(0) && birdWillBeEaten(state)(0))
-  ? STARTBIRDS[0]
-  : nextBeak(state)(0)(nextPeck1(state));
-const nextBird2 = state => (isFrightened(state)(1) && birdWillBeEaten(state)(1))
-  ? STARTBIRDS[1]
-  : ((state.timebirds >= 10)
-    ? nextBeak(state)(1)(nextPeck2(state))
-    : state.birds[1])
-const nextBird3 = state => (isFrightened(state)(2) && birdWillBeEaten(state)(2))
-  ? STARTBIRDS[2]
-  : ((state.timebirds >= 20) 
-  ? nextBeak(state)(2)(nextPeck3(state))
-  : state.birds[2])
-const nextBird4 = state => (isFrightened(state)(3) && birdWillBeEaten(state)(3))
-  ? STARTBIRDS[3]
-  : ((state.timebirds >= 30) 
-  ? nextBeak(state)(3)(nextPeck4(state))
-  : state.birds[3])
+const basicNextBird  = state => i => funcpeck => (isFrightened(state)(i) && birdWillBeEaten(state)(i))
+  ? STARTBIRDS[i]
+  : ((state.timebirds >= (i * 10))
+    ? nextBeak(state)(i)(funcpeck[i])
+    : state.birds[i])
+
+const nextBird = state => i => basicNextBird(state)(i)(nextPecks(state))
 
 const nextBirds = state => pointEq(state.moves[0])(STOP)
   //At the beginning of a stage, 
   //the birds only start moving after the snake moves
   ? state.birds
-  : [nextBird1(state), 
-     nextBird2(state),
-     nextBird3(state),
-     nextBird4(state)]
+  : [nextBird(state)(0), 
+     nextBird(state)(1),
+     nextBird(state)(2),
+     nextBird(state)(3)]
 
-const nextTimeBirds = state => pointEq(state.moves[0])(STOP)
-  ? state.timebirds
-  : (state.timebirds + 1)
+const nextTimeBirds = state => (state.timebirds + 1)
 
 const nextTimeGame = state => pointEq(state.moves[0])(STOP)
   ? state.timegame
@@ -311,7 +303,7 @@ const initialState = () => ({
 
 // Bird eats snake state
 const eatenState = state => ({
-  moves: [STOP], 
+  moves: [NORTH], 
   snake: [START],
   apple: state.apple,
   eggs:  state.eggs,
@@ -324,12 +316,12 @@ const eatenState = state => ({
 })
 
 const next = state => state.snake.length == 0
-    ? state.lives.length > 1 //Check array of lives
-      ? eatenState(state) //shortens life
-      : initialState() //Reset game
-    : state.apple.length == 0
+  ? (state.lives.length > 1 //Check array of lives
+    ? eatenState(state)     //shortens life
+    : initialState())       //Reset game
+  : (((state.apple.length == 0) && (state.eggs.lenght == 0))
     ? initialState()
-    : {
+    : ({
         moves: nextMoves(state),
         snake: nextSnake(state),
         apple: nextApple(state),
@@ -340,7 +332,7 @@ const next = state => state.snake.length == 0
         timegame: nextTimeGame(state),
         lives: state.lives,
         frightened: nextFrightened(state) 
-      };
+      }));
 
 const enqueue = (state, move) => (state.moves.length < 4) ? merge(state)({ moves: state.moves.concat([move]) })
   : state
