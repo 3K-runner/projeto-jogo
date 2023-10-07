@@ -28,9 +28,13 @@ const draw = () => {
   ctx.fillRect(0, 0, x(COLS), canvas.height)
   
   // draw maze
-  ctx.fillStyle = 'rgb(39,97,28)'
-  WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
-
+  WALLS.map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  
   if (state.lives.length != 0){
     // draw lives
     state.lives.map((p1, i) => {
@@ -57,12 +61,10 @@ const draw = () => {
   if (state.eggs.length != 0){
     // draw eggs
     state.eggs.map(p1 => {
-      ctx.fillStyle = 'rgb(255,255,255)'
-      ctx.fillRect(x(p1.x), y(p1.y), x(1), y(1))
-      //EGG.map(p2 => {
-      //  ctx.fillStyle = p2.colour
-      //  ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
-      //})
+      EGG.map(p2 => {
+        ctx.fillStyle = p2.colour
+        ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      })
     })
   }
   
