@@ -229,7 +229,7 @@ const nextPeck2 = state => {
     ? randomPosition()
     : (inScatterMode(state)
       ? ({ x:19, y:16 })
-      : (pointEq(state.moves[0])(NORTH)
+      : (pointEqual(state.moves[0])(NORTH)
         ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)})
         : ({ x: (state.snake[0].x + 2 * state.moves[0].x), y: (state.snake[0].y + 2 * state.moves[0].y)})));
 
