@@ -163,8 +163,7 @@ const STARTBIRDS = [{ x: 8, y: 6 },
                     { x:11, y: 6 }]
 
 const STARTLIVES = [{ x:20, y: 1 },
-                    { x:20, y: 0 },
-                    { x:20, y: 2 }]
+                    { x:20, y: 0 }]
 
 // Point operations
 const pointEqual = position1 => position2 => (position1.x == position2.x 
