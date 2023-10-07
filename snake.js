@@ -111,27 +111,25 @@ const LIFES = [{ x:20, y: 0 },
                { x:20, y: 1 }]
 
 // Point operations
-const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y 
+const pointEqual = position1 => position2 => (position1.x == position2.x 
+                                              && 
+                                              position1.y == position2.y)
 
 // Booleans
-const wontEat   = state => p => pointEq(nextHead(state))(p) ? false : true
-const eggEaten   = state => state.eggs.some(pointEq(nextHead(state))) ? true : false 
-const willCrash = state => 
-  (state.birds.some((p, i) => isFrightened(state)(i) 
+const wontEat          = state => p => pointEqual(nextHead(state))(p) ? false : true
+const eggWillBeEaten   = state => state.eggs.some(pointEqual(nextHead(state))) ? true : false 
+const snakeWillBeEaten = state => 
+  state.birds.some((p, i) => isFrightened(state)(i) 
     ? false
-    : pointEq(nextHead(state))(p))
-  ) 
-  || 
-  (state.birds.some((p, i) => isFrightened(state)(i) 
-    ? false
-    : pointEq(state.snake[0])(p))
-  )
-const birdWillBeEaten = state => i => (pointEq(nextHead(state))(state.birds[i])) || (pointEq(state.snake[0])(state.birds[i]))
-const avoidMaze = state => WALLS.some(pointEq(nextHead(state))) ? false : true
-const avoidMazeB = state => i => peck => WALLS.some(pointEq(nextBeak(state)(i)(peck))) ? false : true
-const notOpositeMove = state => i => peck =>
+    : (pointEqual(nextHead(state))(p)
+       ||
+       pointEqual(state.snake[0])(p))) 
+const birdWillBeEaten = state => i => (pointEqual(nextHead(state))(state.birds[i]) 
+                                       || 
+                                       pointEqual(state.snake[0])(state.birds[i]))
+const avoidMaze       = state => p => WALLS.some(pointEqual(p)) ? false : true
+const notOpositeMove  = state => i => peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
-const frightMode   = state => state.frightened.some(p => (p != 0)) 
 const isFrightened = state => i => (state.frightened[i] != 0) 
   ? ((state.timegame - state.frightened[i] >= 15)
     ? false
@@ -149,7 +147,7 @@ const chosenPeck = target => state => i => {
   // Avoids turning around (180)
   const optionsPeck2 = [...optionsPeck1].filter(p => notOpositeMove(state)(i)(p))
   // Does not hit the maze walls
-  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMazeB(state)(i)(p));
+  const optionsPeck3 = [...optionsPeck2].filter(p => avoidMaze(state)(nextBeak(state)(i)(p)));
   
   // Orders the movements according to 
   // the distance from the bird to the target
@@ -218,11 +216,11 @@ const nextPeck4 = state => {
 }
 
 const nextPecks = state => [nextPeck1(state),
-                   nextPeck2(state),
-                   nextPeck3(state),
-                   nextPeck4(state)]
+                            nextPeck2(state),
+                            nextPeck3(state),
+                            nextPeck4(state)]
 
-const nextApple = state => state.apple.filter(wontEat(state))
+const nextApple = state => state.apples.filter(wontEat(state))
 const nextEgg   = state => state.eggs.filter(wontEat(state))
 
 const nextHead  = state => ({
@@ -235,22 +233,22 @@ const nextBeak  = state => i => move => ({
       y: mod(ROWS)(state.birds[i].y + move.y)
     })
 
-const nextSnake = state => willCrash(state)
+const nextSnake = state => snakeWillBeEaten(state)
   ? [] 
-  : (avoidMaze(state) 
+  : (avoidMaze(state)(nextHead(state)) 
     // Stops the snake when facing a wall
      ? [nextHead(state)] 
      : state.snake) 
 
-const basicNextBird  = state => i => funcpeck => (isFrightened(state)(i) && birdWillBeEaten(state)(i))
+const basicNextBird = state => i => movepeck => (isFrightened(state)(i) && birdWillBeEaten(state)(i))
   ? STARTBIRDS[i]
   : ((state.timebirds >= (i * 10))
-    ? nextBeak(state)(i)(funcpeck[i])
+    ? nextBeak(state)(i)(movepeck[i])
     : state.birds[i])
 
-const nextBird = state => i => basicNextBird(state)(i)(nextPecks(state))
+const nextBird  = state => i => basicNextBird(state)(i)(nextPecks(state))
 
-const nextBirds = state => pointEq(state.moves[0])(STOP)
+const nextBirds = state => pointEqual(state.moves[0])(STOP)
   //At the beginning of a stage, 
   //the birds only start moving after the snake moves
   ? state.birds
@@ -260,8 +258,7 @@ const nextBirds = state => pointEq(state.moves[0])(STOP)
      nextBird(state)(3)]
 
 const nextTimeBirds = state => (state.timebirds + 1)
-
-const nextTimeGame = state => pointEq(state.moves[0])(STOP)
+const nextTimeGame  = state => pointEqual(state.moves[0])(STOP)
   ? state.timegame
   : (state.timegame + 1)
 
@@ -270,7 +267,7 @@ const nextFright = state => i => isFrightened(state)(i)
     ? 0
     : state.frightened[i])
   : 0   
-const nextFrightened = state => eggEaten(state)
+const nextFrightened = state => eggWllBeEaten(state)
   ? [state.timegame, 
      state.timegame, 
      state.timegame, 
@@ -280,7 +277,7 @@ const nextFrightened = state => eggEaten(state)
      nextFright(state)(2), 
      nextFright(state)(3)]
 
-// Returns a random position (rnd pos)
+// Returns a random position
 const randomPosition = () => ({
   x: rnd(0)(COLS - 1),
   y: rnd(0)(ROWS - 1)
@@ -290,7 +287,7 @@ const randomPosition = () => ({
 const initialState = () => ({
   moves: [STOP], 
   snake: [START],
-  apple: FRUITS,
+  apples: FRUITS,
   eggs:  STARTEGGS,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
@@ -304,7 +301,7 @@ const initialState = () => ({
 const eatenState = state => ({
   moves: [NORTH], 
   snake: [START],
-  apple: state.apple,
+  apples: state.apples,
   eggs:  state.eggs,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
@@ -318,17 +315,17 @@ const next = state => state.snake.length == 0
   ? (state.lives.length > 0 //Check array of lives
     ? eatenState(state)     //shortens life
     : initialState())       //Reset game
-  : (((state.apple.length == 0) && (state.eggs.lenght == 0))
+  : (((state.apples.length == 0) && (state.eggs.length == 0))
     ? initialState()
     : ({
         moves: nextMoves(state),
         snake: nextSnake(state),
-        apple: nextApple(state),
+        apples: nextApple(state),
         eggs:  nextEgg(state),
         pecks: nextPecks(state),
         birds: nextBirds(state),
         timebirds: nextTimeBirds(state),
-        timegame: nextTimeGame(state),
+        timegame:  nextTimeGame(state),
         lives: state.lives,
         frightened: nextFrightened(state) 
       }));
