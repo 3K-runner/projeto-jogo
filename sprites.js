@@ -1,5 +1,5 @@
 // Art "Sprites"
-const LIVES = [
+const LIVE = [
   {x: 3, y: 1, l: 3, colour: 'rgb(0,0,0)'},
   {x:10, y: 1, l: 3, colour: 'rgb(0,0,0)'},
 
@@ -778,4 +778,4 @@ const WALL = [
 ]
 
 
-module.exports = {LIVES,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE}
+module.exports = {LIVE,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE}
