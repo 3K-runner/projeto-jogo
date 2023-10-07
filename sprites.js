@@ -683,4 +683,99 @@ const APPLE = [
   {x: 5, y: 14, l: 2, colour: 'rgb(0,0,00)'},
   {x: 9, y: 14, l: 2, colour: 'rgb(0,0,00)'}]
 
+const EGG = [
+  {x: 6, y: 2, l: 4, colour: 'rgb(0,0,00)'},
+  {x: 5, y: 3, l: 6, colour: 'rgb(0,0,00)'},
+  {x: 6, y: 3, l: 4, colour: 'rgb(255,255,255)'},
+
+  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00)'},
+  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00)'},
+
+]
+
+const WALL_WE = [
+ {x: 0, y: 1, l: 16, colour: 'rgb(0,0,0)'},
+ {x: 0, y: 2, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 3, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 4, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 5, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 6, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 7, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 8, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 9, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 10, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 11, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 12, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 13, l: 16, colour: 'rgb(39,97,28)'},
+ {x: 0, y: 14, l: 16, colour: 'rgb(0,0,0)'}
+]
+
+const WALL_NS = [
+ {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 2, y: 1, l: 12, colour: 'rgb(39,97,28)'},
+
+ {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 2, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 3, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 4, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 5, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 6, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 7, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 8, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 9, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 10, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 11, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 12, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 13, l: 14, colour: 'rgb(0,0,0)'},
+
+ {x: 1, y: 14, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 2, y: 14, l: 12, colour: 'rgb(39,97,28)'},
+
+ {x: 2, y: 2, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 3, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 4, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 5, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 6, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 7, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 8, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 9, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 10, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 11, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 12, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 13, l: 12, colour: 'rgb(39,97,28)'},
+
+ {x: 1, y: 15, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 2, y: 15, l: 12, colour: 'rgb(39,97,28)'},
+]
+
+const WALL = [
+ {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 2, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 3, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 4, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 5, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 6, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 7, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 8, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 9, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 10, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 11, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 12, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 13, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 1, y: 14, l: 14, colour: 'rgb(0,0,0)'},
+ {x: 2, y: 2, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 3, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 4, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 5, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 6, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 7, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 8, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 9, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 10, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 11, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 12, l: 12, colour: 'rgb(39,97,28)'},
+ {x: 2, y: 13, l: 12, colour: 'rgb(39,97,28)'},
+]
+
+
 module.exports = {LIVES,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE}
