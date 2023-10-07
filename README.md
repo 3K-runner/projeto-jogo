@@ -1,17 +1,30 @@
-# Snake
+# Snake in the Basket 
 
-The game Snake implemented with functional style in JavaScript without libraries. Interfaces for browsers and terminals.
+A game inspired by the classic PAC-MAN implemented with functional style in JavaScript without libraries. Interfaces for browsers, keyboard controls.
 
 
 # Usage
 
-```bash
-git clone git@github.com:chrokh/fp-games.git
-cd 001-snake
-node cli
-```
+- Access the [game site](https://snake-in-basket.netlify.app).
 
-- Use arrow keys, wasd, or hjkl to control the snake.
-- Collect apples.
-- Avoid crashing.
-- Ctrl-c to quit (in terminal).
+# How to play
+
+- Use wasd or hjkl to control the snake.
+- Collect apples and eggs.
+- Avoid getting eaten by the birds.
+
+# Credits
+
+1. 3K-runner (code and planning)
+   - João Gabriel 
+2. ThiagoIury (code)
+   - Thiago Iury 
+3. o-telescena (code and art)
+   - Lucas
+4. caiomagn0 (code)
+   - Caio Magno
+
+# Sources
+
+- This game would not have been developed without the code that served as its basis:
+[chrokh/fp-games/snake](https://github.com/chrokh/fp-games/tree/master/001-snake)
