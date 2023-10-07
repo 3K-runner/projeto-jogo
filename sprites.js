@@ -446,67 +446,54 @@ const EGG = [
   {x: 5, y: 3, l: 6, colour: 'rgb(0,0,00)'},
   {x: 6, y: 3, l: 4, colour: 'rgb(255,255,255)'},
 
-  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00)'},
-  {x: 7, y: 7, l: 2, colour: 'rgb(0,0,00)'},
+  {x: 4, y: 4, l: 8, colour: 'rgb(0,0,00)'}, 
+  {x: 5, y: 4, l: 6, colour: 'rgb(255,255,255)'},
+  {x: 4, y: 5, l: 8, colour: 'rgb(0,0,00)'}, 
+  {x: 5, y: 5, l: 6, colour: 'rgb(255,255,255)'},
 
+  {x: 5, y: 5, l: 1, colour: 'rgb(0,165,5)'},
+  {x: 9, y: 5, l: 2, colour: 'rgb(0,165,5)'},
+
+  {x: 3, y: 6, l: 10, colour: 'rgb(0,0,00)'}, 
+  {x: 4, y: 6, l: 8, colour: 'rgb(255,255,255)'},
+  {x: 4, y: 6, l: 1, colour: 'rgb(164,164,164)'},
+  {x: 9, y: 6, l: 2, colour: 'rgb(0,165,5)'},
+ 
+  {x: 3, y: 7, l: 10, colour: 'rgb(0,0,00)'}, 
+  {x: 4, y: 7, l: 8, colour: 'rgb(255,255,255)'},
+  {x: 4, y: 7, l: 1, colour: 'rgb(164,164,164)'},
+
+  {x: 3, y: 8, l: 10, colour: 'rgb(0,0,00)'}, 
+  {x: 4, y: 8, l: 8, colour: 'rgb(255,255,255)'},
+  {x: 4, y: 8, l: 1, colour: 'rgb(164,164,164)'},
+  {x: 6, y: 8, l: 1, colour: 'rgb(0,165,5)'},
+  {x: 2, y: 9, l: 12, colour: 'rgb(0,0,00)'}, 
+  {x: 4, y: 9, l: 8, colour: 'rgb(255,255,255)'},
+  {x: 4, y: 9, l: 2, colour: 'rgb(164,164,164)'},
+  {x: 9, y: 9, l: 1, colour: 'rgb(0,165,5)'},
+
+  {x: 1, y: 10, l: 14, colour: 'rgb(0,0,00)'}, 
+  {x: 5, y: 10, l: 6, colour: 'rgb(164,164,164)'},
+  {x: 2, y: 10, l: 1, colour: 'rgb(220,181,121)'}, 
+  {x: 13, y: 10, l: 1, colour: 'rgb(220,181,121)'},
+  
+  {x: 1, y: 11, l: 14, colour: 'rgb(0,0,00)'}, 
+  {x: 2, y: 11, l: 2, colour: 'rgb(220,181,121)'}, 
+  {x: 12, y: 11, l: 2, colour: 'rgb(220,181,121)'},
+  {x: 13, y: 11, l: 1, colour: 'rgb(106,87,58)'}, 
+  {x: 2, y: 11, l: 1, colour: 'rgb(106,87,58)'}, 
+
+  {x: 2, y: 12, l: 12, colour: 'rgb(0,0,00)'}, 
+  {x: 3, y: 12, l: 10, colour: 'rgb(220,181,121)'}, 
+  {x: 8, y: 12, l: 2, colour: 'rgb(106,87,58)'}, 
+
+  {x: 3, y: 13, l: 10, colour: 'rgb(0,0,00)'}, 
+  {x: 4, y: 13, l: 8, colour: 'rgb(220,181,121)'}, 
+  {x: 5, y: 13, l: 1, colour: 'rgb(106,87,58)'},
+  {x: 4, y: 14, l: 8, colour: 'rgb(0,0,0)'}, ]
 ]
 
-const WALL_WE = [
- {x: 0, y: 1, l: 16, colour: 'rgb(0,0,0)'},
- {x: 0, y: 2, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 3, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 4, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 5, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 6, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 7, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 8, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 9, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 10, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 11, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 12, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 13, l: 16, colour: 'rgb(39,97,28)'},
- {x: 0, y: 14, l: 16, colour: 'rgb(0,0,0)'}
-]
-
-const WALL_NS = [
- {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
- {x: 2, y: 1, l: 12, colour: 'rgb(39,97,28)'},
-
- {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 2, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 3, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 4, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 5, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 6, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 7, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 8, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 9, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 10, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 11, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 12, l: 14, colour: 'rgb(0,0,0)'},
- {x: 1, y: 13, l: 14, colour: 'rgb(0,0,0)'},
-
- {x: 1, y: 14, l: 14, colour: 'rgb(0,0,0)'},
- {x: 2, y: 14, l: 12, colour: 'rgb(39,97,28)'},
-
- {x: 2, y: 2, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 3, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 4, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 5, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 6, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 7, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 8, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 9, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 10, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 11, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 12, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 13, l: 12, colour: 'rgb(39,97,28)'},
-
- {x: 1, y: 15, l: 14, colour: 'rgb(0,0,0)'},
- {x: 2, y: 15, l: 12, colour: 'rgb(39,97,28)'},
-]
-
-const WALL = [
+const SPRITE_WALL = [
  {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
  {x: 1, y: 2, l: 14, colour: 'rgb(0,0,0)'},
  {x: 1, y: 3, l: 14, colour: 'rgb(0,0,0)'},
@@ -532,8 +519,47 @@ const WALL = [
  {x: 2, y: 10, l: 12, colour: 'rgb(39,97,28)'},
  {x: 2, y: 11, l: 12, colour: 'rgb(39,97,28)'},
  {x: 2, y: 12, l: 12, colour: 'rgb(39,97,28)'},
- {x: 2, y: 13, l: 12, colour: 'rgb(39,97,28)'},
-]
+ {x: 2, y: 13, l: 12, colour: 'rgb(39,97,28)'},]
+
+const WALL_EAST= [
+  {x: 14, y: 1, l: 2, colour: 'rgb(0,0,0)'},
+  {x: 14, y: 2, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 3, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 4, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 5, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 6, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 7, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 8, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 9, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 10, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 11, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 12, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 13, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 14, y: 14, l: 2, colour: 'rgb(0,0,0)'},]
+const WALL_WEST= [
+  {x: 0, y: 1, l: 2, colour: 'rgb(0,0,0)'},
+  {x: 0, y: 2, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 3, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 4, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 5, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 6, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 7, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 8, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 9, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 10, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 11, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 12, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 13, l: 2, colour: 'rgb(39,97,28)'},
+  {x: 0, y: 14, l: 2, colour: 'rgb(0,0,0)'},]
+const WALL_NORTH= [
+  {x: 1, y: 0, l: 14, colour: 'rgb(0,0,0)'},
+  {x: 2, y: 1, l: 12, colour: 'rgb(39,97,28)'},
+  {x: 2, y: 0, l: 12, colour: 'rgb(39,97,28)'},]
+const WALL_SOUTH = [
+  {x: 1, y: 15, l: 14, colour: 'rgb(0,0,0)'},
+  {x: 2, y: 14, l: 12, colour: 'rgb(39,97,28)'},
+  {x: 2, y: 15, l: 12, colour: 'rgb(39,97,28)'},]
 
 
-module.exports = {LIVE,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE}
+
+module.exports = {SPRITE_fWALL,LIVE,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE,EGG,WALL_NORTH,WALL_SOUTH,WALL_WEST,WALL_EAST}
