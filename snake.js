@@ -97,7 +97,8 @@ const WALLS  = [{ x: 0, y: 0 }, { x: 1, y: 0 },
                 { x:16, y:13 }, { x:17, y:13 },
                 { x:18, y:13 }, { x:19, y:13 }]
 
-const FRUITS = [{ x: 1, y: 1 }, { x: 2, y: 1 },
+const STARTAPPLES = [
+                { x: 1, y: 1 }, { x: 2, y: 1 },
                 { x: 3, y: 1 }, { x: 4, y: 1 },
                 { x: 5, y: 1 }, { x: 6, y: 1 },
                 { x: 7, y: 1 }, { x: 8, y: 1 },
@@ -154,13 +155,16 @@ const FRUITS = [{ x: 1, y: 1 }, { x: 2, y: 1 },
 const STARTEGGS = [{ x: 1, y: 4 }, { x: 1, y:10 }, 
                    { x:18, y: 4 }, { x:18, y:10 }]
 
-const START  = { x: 9, y: 8 } // Starting position
+const STARTSNAKE  = [{ x: 9, y: 8 }] // Starting position
+
 const STARTBIRDS = [{ x: 8, y: 6 }, 
                     { x: 9, y: 6 }, 
                     { x:10, y: 6 },
                     { x:11, y: 6 }]
-const LIFES = [{ x:20, y: 0 },
-               { x:20, y: 1 }]
+
+const STARTLIVES = [{ x:20, y: 1 },
+                    { x:20, y: 0 },
+                    { x:20, y: 2 }]
 
 // Point operations
 const pointEqual = position1 => position2 => (position1.x == position2.x 
@@ -338,21 +342,21 @@ const randomPosition = () => ({
 // Initial state
 const initialState = () => ({
   moves: [STOP], 
-  snake: [START],
-  apples: FRUITS,
+  snake: STARTSNAKE,
+  apples: STARTAPPLES,
   eggs:  STARTEGGS,
   pecks: [STOP, STOP, STOP, STOP],
   birds: STARTBIRDS,
   timebirds: 0,
   timegame:  0,
-  lives: LIFES, // Add lives
+  lives: STARTLIVES, // Add lives
   frightened: [0, 0, 0, 0]
 })
 
 // Bird eats snake state
 const eatenState = state => ({
   moves: [NORTH], 
-  snake: [START],
+  snake: STARTSNAKE,
   apples: state.apples,
   eggs:  state.eggs,
   pecks: [STOP, STOP, STOP, STOP],
