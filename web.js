@@ -38,13 +38,10 @@ const draw = () => {
   if (state.lives.length != 0){
     // draw lives
     state.lives.map((p1, i) => {
-      // Only 2 of the 3 lives are shown
-      if(state.lives.length > i + 1){
-        LIVE.map(p2 => {
-          ctx.fillStyle = p2.colour
-          ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
-        })
-      }
+      LIVE.map(p2 => {
+        ctx.fillStyle = p2.colour
+        ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      })
     })
   }
   
