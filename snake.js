@@ -108,8 +108,7 @@ const STARTBIRDS = [{ x: 8, y: 6 },
                     { x:10, y: 6 },
                     { x:11, y: 6 }]
 const LIFES = [{ x:20, y: 0 },
-               { x:20, y: 1 },
-               { x:20, y: 2 }]
+               { x:20, y: 1 }]
 
 // Point operations
 const pointEq = p1 => p2 => p1.x == p2.x && p1.y == p2.y 
@@ -141,7 +140,7 @@ const isFrightened = state => i => (state.frightened[i] != 0)
 const inScatterMode = state => ((Math.trunc(state.timegame / 20) % 2) == 0)
 
 const nextMoves = state => (state.moves.length > 1) ? dropFirst(state.moves) : state.moves
-const nextLives = state => (state.lives.length > 1) ? dropFirst(state.lives) : state.lives
+const nextLives = state => (state.lives.length > 0) ? dropFirst(state.lives) : state.lives
 
 const chosenPeck = target => state => i => {
   // Preference for anti-clockwise movement,
@@ -316,7 +315,7 @@ const eatenState = state => ({
 })
 
 const next = state => state.snake.length == 0
-  ? (state.lives.length > 1 //Check array of lives
+  ? (state.lives.length > 0 //Check array of lives
     ? eatenState(state)     //shortens life
     : initialState())       //Reset game
   : (((state.apple.length == 0) && (state.eggs.lenght == 0))
