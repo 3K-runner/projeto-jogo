@@ -10,7 +10,7 @@ let state = initialState()
 // Position helpers
 // for entire square
 // -Takes a coordinate and resizes it for the canvas 
-const x = c => Math.round(c * canvas.width / COLS) 
+const x = c => Math.round(c * canvas.width / (COLS + 1)) 
 const y = r => Math.round(r * canvas.height / ROWS) 
 // for grid art
 // -Takes a coordinate and applies the grid on it
@@ -20,12 +20,29 @@ const yg = br => r => y(br.y + r.y/BITS)
 // Game loop draw
 const draw = () => {
   // clear
-  ctx.fillStyle = 'rgb(96, 64, 32)'
+  ctx.fillStyle = 'rgb(0, 0, 0)'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
+  
+  // draw paths
+  ctx.fillStyle = 'rgb(96, 64, 32)'
+  ctx.fillRect(0, 0, x(COLS), canvas.height)
   
   // draw maze
   ctx.fillStyle = 'rgb(39,97,28)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
+
+  if (state.lives.length != 0){
+    // draw lives
+    state.lives.map((p1, i) => {
+      // Only 2 of the 3 lives are shown
+      if(state.lives.length > i + 1){
+        LIVE.map(p2 => {
+          ctx.fillStyle = p2.colour
+          ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+        })
+      }
+    })
+  }
   
   if (state.apples.length != 0){
     // draw apples
@@ -97,7 +114,7 @@ const draw = () => {
   // add crash
   if (state.snake.length == 0){
     ctx.fillStyle = 'rgb(255,0,0)'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillRect(0, 0, x(COLS), canvas.height)
   } else {
     // draw snake
     SNAKE.map(p => {
@@ -110,7 +127,7 @@ const draw = () => {
   if ((state.apples.length == 0) && (state.eggs.length == 0)){
     // If all apples have been collected, the screen flashes green
     ctx.fillStyle = 'rgb(0,255,0)'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillRect(0, 0, x(COLS), canvas.height)
   }
 }
 // Game loop update
