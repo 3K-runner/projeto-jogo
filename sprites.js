@@ -491,7 +491,6 @@ const EGG = [
   {x: 4, y: 13, l: 8, colour: 'rgb(220,181,121)'}, 
   {x: 5, y: 13, l: 1, colour: 'rgb(106,87,58)'},
   {x: 4, y: 14, l: 8, colour: 'rgb(0,0,0)'}, ]
-]
 
 const SPRITE_WALL = [
  {x: 1, y: 1, l: 14, colour: 'rgb(0,0,0)'},
@@ -536,6 +535,7 @@ const WALL_EAST= [
   {x: 14, y: 12, l: 2, colour: 'rgb(39,97,28)'},
   {x: 14, y: 13, l: 2, colour: 'rgb(39,97,28)'},
   {x: 14, y: 14, l: 2, colour: 'rgb(0,0,0)'},]
+
 const WALL_WEST= [
   {x: 0, y: 1, l: 2, colour: 'rgb(0,0,0)'},
   {x: 0, y: 2, l: 2, colour: 'rgb(39,97,28)'},
@@ -551,10 +551,12 @@ const WALL_WEST= [
   {x: 0, y: 12, l: 2, colour: 'rgb(39,97,28)'},
   {x: 0, y: 13, l: 2, colour: 'rgb(39,97,28)'},
   {x: 0, y: 14, l: 2, colour: 'rgb(0,0,0)'},]
+
 const WALL_NORTH= [
   {x: 1, y: 0, l: 14, colour: 'rgb(0,0,0)'},
   {x: 2, y: 1, l: 12, colour: 'rgb(39,97,28)'},
   {x: 2, y: 0, l: 12, colour: 'rgb(39,97,28)'},]
+
 const WALL_SOUTH = [
   {x: 1, y: 15, l: 14, colour: 'rgb(0,0,0)'},
   {x: 2, y: 14, l: 12, colour: 'rgb(39,97,28)'},
