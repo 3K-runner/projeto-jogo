@@ -72,7 +72,7 @@ const draw = () => {
     ctx.fillRect(xg(state.birds[0])(p), yg(state.birds[0])(p), x(p.l/BITS), y(1/BITS))
   })
   if (isFrightened(state)(0)){
-    EAGLE.map(p => {
+    EAGLESCARED.map(p => {
       ctx.fillStyle = p.colour
       ctx.fillRect(xg(state.birds[0])(p), yg(state.birds[0])(p), x(p.l/BITS), y(1/BITS))
     })
@@ -83,7 +83,7 @@ const draw = () => {
     ctx.fillRect(xg(state.birds[1])(p), yg(state.birds[1])(p), x(p.l/BITS), y(1/BITS))
   })
   if (isFrightened(state)(1)){
-    EAGLE.map(p => {
+    SECYSCARED.map(p => {
       ctx.fillStyle = p.colour
       ctx.fillRect(xg(state.birds[1])(p), yg(state.birds[1])(p), x(p.l/BITS), y(1/BITS))
     })
@@ -94,7 +94,7 @@ const draw = () => {
     ctx.fillRect(xg(state.birds[2])(p), yg(state.birds[2])(p), x(p.l/BITS), y(1/BITS))
   })
   if (isFrightened(state)(2)){
-    EAGLE.map(p => {
+    GUINESCARED.map(p => {
       ctx.fillStyle = p.colour
       ctx.fillRect(xg(state.birds[2])(p), yg(state.birds[2])(p), x(p.l/BITS), y(1/BITS))
     })
@@ -105,7 +105,7 @@ const draw = () => {
     ctx.fillRect(xg(state.birds[3])(p), yg(state.birds[3])(p), x(p.l/BITS), y(1/BITS))
   })
   if (isFrightened(state)(3)){
-    EAGLE.map(p => {
+    OWLSCARED.map(p => {
       ctx.fillStyle = p.colour
       ctx.fillRect(xg(state.birds[3])(p), yg(state.birds[3])(p), x(p.l/BITS), y(1/BITS))
     })
