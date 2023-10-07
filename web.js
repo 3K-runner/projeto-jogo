@@ -27,9 +27,9 @@ const draw = () => {
   ctx.fillStyle = 'rgb(39,97,28)'
   WALLS.map(p => ctx.fillRect(x(p.x), y(p.y), x(1), y(1)))
   
-  if (state.apple.length != 0){
+  if (state.apples.length != 0){
     // draw apples
-    state.apple.map(p1 => {
+    state.apples.map(p1 => {
       APPLE.map(p2 => {
         ctx.fillStyle = p2.colour
         ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
@@ -107,7 +107,7 @@ const draw = () => {
   }
 
   // add win
-  if ((state.apple.lengtht == 0) && (state.eggs.lenght == 0)){
+  if ((state.apples.length == 0) && (state.eggs.length == 0)){
     // If all apples have been collected, the screen flashes green
     ctx.fillStyle = 'rgb(0,255,0)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -115,7 +115,7 @@ const draw = () => {
 }
 // Game loop update
 const step = t1 => t2 => {
-  if (t2 - t1 > 200) {
+  if (t2 - t1 > 240) {
     state = next(state)
     draw()
     window.requestAnimationFrame(step(t2))
