@@ -9,7 +9,7 @@ A game inspired by the classic PAC-MAN implemented with functional style in Java
 
 # How to play
 
-- Use wasd or hjkl to control the snake.
+- Use WASD or HJKL to control the snake.
 - Collect apples and eggs.
 - Avoid getting eaten by the birds.
 
@@ -20,7 +20,7 @@ A game inspired by the classic PAC-MAN implemented with functional style in Java
 2. ThiagoIury (code)
    - Thiago Iury 
 3. o-telescena (code and art)
-   - Lucas
+   - Lucas Teles
 4. caiomagn0 (code)
    - Caio Magno
 
