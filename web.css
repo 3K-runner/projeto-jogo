@@ -5,7 +5,37 @@ html, body {
   background:      #121212;
   text-align:      center;
   color:           #fff;
-  display:         flex;
-  justify-content: center;
-  align-items:     center;
 }
+
+.header {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 900px;
+  margin: 20px auto;
+}
+
+canvas {
+  width: 672px;
+  height: 448px;
+}
+
+
+.game {
+  flex: 1;
+  border: 2px solid #fff;
+}
+
+.instructions {
+  flex-basis: 200px; 
+  background-color: #333;
+  padding: 20px;
+  text-align: left;
+  border: 2px solid #fff;
+
+}
+
