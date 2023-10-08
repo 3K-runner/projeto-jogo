@@ -336,6 +336,19 @@ const eatenState = state => ({
   lives:      nextLives(state)
 })
 
+// Usual next state
+const basicNextState = state => ({
+  moves:      nextMoves(state),
+  snake:      nextSnake(state),
+  pecks:      nextPecks(state),
+  birds:      nextBirds(state),
+  frightened: nextFrightened(state),
+  apples:     nextApple(state),
+  eggs:       nextEgg(state),
+  timegame:   nextTimeGame(state),
+  lives:      state.lives
+})
+
 // Returns next game turn 
 const next = state => state.snake.length == 0
   // If the snake was eaten,
