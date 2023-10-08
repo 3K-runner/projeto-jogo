@@ -255,6 +255,30 @@ const draw = () => {
       ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
     })
   })
+    WALLS[16].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    BASKET.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+
+  WALLS[17].map(p1 => {
+    BLUEBERRY.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+
+  WALLS[18].map(p1 => {
+    RASPBERRY.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
   
   if (state.lives.length != 0){
     // draw lives
