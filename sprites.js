@@ -562,6 +562,102 @@ const WALL_SOUTH = [
   {x: 2, y: 14, l: 12, colour: 'rgb(39,97,28)'},
   {x: 2, y: 15, l: 12, colour: 'rgb(39,97,28)'},]
 
+const BASKET = [
+  {x: 0, y: 0, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 0, y: 1, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 9, y: 1, l: 4, colour: 'rgb(141,141,102)'},
+  {x: 11, y: 1, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 2, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 1, y: 2, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 5, y: 2, l: 2, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 3, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 1, y: 3, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 6, y: 3, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 10, y: 3, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 4, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 11, y: 4, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 14, y: 4, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 5, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 3, y: 5, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 11, y: 5, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 6, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 2, y: 6, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 7, y: 6, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 12, y: 6, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 7, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 2, y: 7, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 13, y: 7, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 8, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 1, y: 8, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 5, y: 8, l: 3, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 9, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 1, y: 9, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 10, y: 9, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 10, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 1, y: 10, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 10, y: 10, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 11, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 3, y: 11, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 12, y: 11, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 12, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 2, y: 12, l: 2, colour: 'rgb(141,141,102)'},
+  {x: 6, y: 12, l: 4, colour: 'rgb(141,141,102)'},
+  {x: 13, y: 12, l: 1, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 13, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 1, y: 13, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 5, y: 13, l: 1, colour: 'rgb(141,141,102)'},
+  {x: 12, y: 13, l: 1, colour: 'rgb(141,141,102)'},
 
 
-module.exports = {SPRITE_fWALL,LIVE,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE,EGG,WALL_NORTH,WALL_SOUTH,WALL_WEST,WALL_EAST}
+  {x: 0, y: 14, l: 16, colour: 'rgb(233,233,140)'},
+  {x: 9, y: 14, l: 2, colour: 'rgb(141,141,102)'},
+
+  {x: 0, y: 15, l: 16, colour: 'rgb(233,233,140)'},
+  
+]
+
+const BLUEBERRY = [ 
+  {x: 6, y: 4, l: 2, colour: 'rgb(30,30,255)'},
+  {x: 6, y: 5, l: 2, colour: 'rgb(30,30,255)'},
+
+  {x: 11, y: 11, l: 2, colour: 'rgb(30,30,255)'},
+  {x: 11, y: 12, l: 2, colour: 'rgb(30,30,255)'},
+
+  {x: 9, y: 6, l: 2, colour: 'rgb(30,30,255)'},
+  {x: 9, y: 7, l: 2, colour: 'rgb(30,30,255)'},
+
+  {x: 3, y: 9, l: 2, colour: 'rgb(30,30,255)'},
+  {x: 3, y: 10, l: 2, colour: 'rgb(30,30,255)'},
+]
+
+const RASPBERRY = [
+  {x: 6, y: 4, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 6, y: 5, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 6, y: 6, l: 2, colour: 'rgb(155,30,30)'},
+
+  {x: 11, y: 10, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 11, y: 11, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 11, y: 12, l: 2, colour: 'rgb(155,30,30)'},
+
+  {x: 9, y: 6, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 9, y: 7, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 9, y: 8, l: 2, colour: 'rgb(155,30,30)'},
+
+  {x: 3, y: 9, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 3, y: 10, l: 2, colour: 'rgb(255,30,30)'},
+  {x: 3, y: 11, l: 2, colour: 'rgb(155,30,30)'},
+]
+
+module.exports = {RASPBERRY,BLUEBERRY,BASKET,SPRITE_WALL,LIVE,GUINE,GUINESCARED,SECY,SECYSCARED,OWL,OWLSCARED,EAGLE,EAGLESCARED,SNAKE,APPLE,EGG,WALL_NORTH,WALL_SOUTH,WALL_WEST,WALL_EAST}
