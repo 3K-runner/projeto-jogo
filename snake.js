@@ -147,7 +147,7 @@ const snakeWillBeEaten = state =>
 const birdWillBeEaten = state => i => (pointEqual(nextHead(state))(state.birds[i]) 
                                        || 
                                        pointEqual(state.snake[0])(state.birds[i]))
-const avoidMaze       = state => p => WALLS.some(pointEqual(p)) ? false : true
+const avoidMaze       = state => p => !WALLS.flat().some(pointEqual(p))
 const notOpositeMove  = state => i => peck =>
   (state.pecks[i].x + peck.x != 0) || (state.pecks[i].y + peck.y !=0)
 const isFrightened = state => i => (state.frightened[i] != 0) 
