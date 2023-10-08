@@ -13,13 +13,13 @@ const WEST  = { x:-1, y: 0 }
 const STOP  = { x: 0, y: 0 } // Move Stop
 // position
 const WALLS  = [
-// Layer in West and South
-  [{ x: 0, y: 0 }, { x: 2, y: 2 }, { x:16, y: 2 }, { x: 8, y: 2 },{ x: 9, y: 9 }],
 // Layer in East and South
-  [{ x:19, y: 0 }, { x: 3, y: 2 }, { x:17, y: 2 }, { x:11, y: 2 },{ x:10, y: 9 }],
-// Layer in North and West
-  [{ x: 0, y: 5 }, { x: 2, y: 3 }, { x:16, y: 3 }, { x: 8, y: 3 }, { x: 0, y:13 },{ x: 9, y:11 }],
+  [{ x: 0, y: 0 }, { x: 2, y: 2 }, { x:16, y: 2 }, { x: 8, y: 2 }],
+// Layer in West and South
+  [{ x:19, y: 0 }, { x: 3, y: 2 }, { x:17, y: 2 }, { x:11, y: 2 }],
 // Layer in North and East
+  [{ x: 0, y: 5 }, { x: 2, y: 3 }, { x:16, y: 3 }, { x: 8, y: 3 }, { x: 0, y:13 },{ x: 9, y:11 }],
+// Layer in North and West
   [{ x: 19, y: 5 }, { x: 3, y: 3 }, { x:17, y: 3 },{ x:11, y: 3 },  { x:19, y:13 },{ x:10, y:11 }],
 
 // Layer in East and West
@@ -31,27 +31,27 @@ const WALLS  = [
    { x: 8, y: 13 }, { x: 9, y:13 },{ x:10, y:13 }, { x:11, y:13 },{ x:12, y:13 },
    { x:13, y: 13 }, { x:14, y:13 }, { x:15, y:13 },{ x:16, y:13 }, { x:17, y:13 },
    { x:18, y: 13 }, { x: 3, y:11 }, { x: 4, y:11 },{ x: 6, y:11 },{ x:13, y:11 },
-   { x:15, y: 11 }, { x:16, y:11 },{ x: 8, y: 9 },{ x:11, y: 9 }], 
+   { x:15, y: 11 }, { x:16, y:11 },{ x: 8, y: 9 },{ x:11, y: 9 },{ x: 1, y: 5 }, { x: 2, y: 5 },{ x:17, y: 5 }, { x:18, y: 5 }], 
 // Layer in North and South-
   [{ x: 0, y: 1 }, { x: 0, y: 2 }, { x: 0, y: 3 },{ x: 0, y: 4 }, { x:19, y: 1 },
     { x:19, y: 2 },{ x:19, y: 3 }, { x:19, y: 4 }, { x: 5, y: 4 },{ x:14, y: 4 },
-    { x: 1, y: 5 }, { x: 2, y: 5 },{ x:17, y: 5 }, { x:18, y: 5 }, { x: 0, y: 8 },
+     { x: 0, y: 8 },
     { x: 0, y:10 }, { x: 0, y:11 }, { x: 0, y:12 },{ x:19, y: 8 }, { x:19, y:10 },
     { x:19, y:11 },{ x:19, y:12 },{ x: 5, y:10 },{ x: 9, y:10 }, { x:10, y:10 },{ x:14, y:10 }],
 
-// Layer in East
-  [{ x: 3, y: 5 }, { x: 6, y: 3 },{ x: 1, y: 9 },{ x:12, y: 9 },{ x: 7, y:11 },{ x:17, y:11 },{ x: 3, y: 7 },{ x:17, y: 7 },{ x: 6, y: 7 },{ x:14, y: 7 }],
 // Layer in West
+  [{ x: 3, y: 5 }, { x: 6, y: 3 },{ x: 1, y: 9 },{ x:12, y: 9 },{ x: 7, y:11 },{ x:17, y:11 },{ x: 3, y: 7 },{ x:17, y: 7 },{ x: 6, y: 7 },{ x:14, y: 7 }],
+// Layer in East
   [{ x:13, y: 3 }, { x:16, y: 5 },{ x: 7, y: 9 }, { x:18, y: 9 },{ x: 2, y:11 }, { x:12, y:11 },{ x: 2, y: 7 }, { x:16, y: 7 },{ x:13, y: 7 },{ x: 5, y: 7 }],
 // Layer in North
   [{ x: 5, y: 5 }, { x:14, y: 5 }],
 // Layer in South
   [{ x: 5, y: 2 }, { x:14, y: 2 },{ x: 0, y: 7 }, { x:19, y: 7 }, { x: 5, y: 9 },{ x:14, y: 9 }], 
 
-  [{ x: 9, y: 2 },{ x:10, y: 2 }], // Layer in South, East, West
+  [{ x: 9, y: 2 },{ x:10, y: 2 },{ x: 9, y: 9 },{ x:10, y: 9 }], // Layer in South, East, West
   [{ x: 9, y: 3 },{ x:10, y: 3 }], // Layer in North, East, West
-  [{ x: 0, y: 9 },{ x: 5, y: 3 }], // Layer in North, South, West
-  [{ x:19, y: 9 },{ x:14, y: 3 }], // Layer in North, South, East
+  [{ x: 0, y: 9 },{ x: 5, y: 3 }], // Layer in North, South, East
+  [{ x:19, y: 9 },{ x:14, y: 3 }], // Layer in North, South, West
   [{ x: 5, y:11 },{ x:14, y:11 }], // Layer in North, West, East
 
 // Not Layer
