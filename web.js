@@ -28,7 +28,228 @@ const draw = () => {
   ctx.fillRect(0, 0, x(COLS), canvas.height)
   
   // draw maze
-  WALLS.map(p1 => {
+  WALLS[0].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+     WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[1].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+     WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[2].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    })
+  })
+  WALLS[3].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[4].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[5].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+    WALLS[6].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      WALL_WEST.map(p2 => {
+        ctx.fillStyle = p2.colour
+        ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      })
+    })
+  })
+    WALLS[7].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+    WALLS[8].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+    WALLS[9].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+    WALLS[10].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+    WALLS[11].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+    WALLS[12].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[13].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_SOUTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+
+  WALLS[14].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_NORTH.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_EAST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+    WALL_WEST.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[15].map(p1 => {
+    SPRITE_WALL.map(p2 => {
+      ctx.fillStyle = p2.colour
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+    })
+  })
+  WALLS[16].map(p1 => {
     SPRITE_WALL.map(p2 => {
       ctx.fillStyle = p2.colour
       ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
