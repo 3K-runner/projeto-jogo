@@ -166,7 +166,7 @@ const isFrightened    = state => i => (state.frightened[i] != 0)
 const isFrightOver    = state => i => (state.timegame - state.frightened[i]) > 15
 // Bird waits before it starts moving in a new turn
 const isTimeToPeck    = state => i => (state.timegame >= (i * 10))
-// Alternates scatter and chase evey 35 game ticks 
+// Alternates scatter and chase every 35 game ticks 
 const areBirdsInScatterMode = state => ((Math.trunc(state.timegame / 35) % 2) == 0)
 // -movement and position
 const willAvoidMaze  = state => p => !((WALLS.flat()).some(pointEqual(p)))
