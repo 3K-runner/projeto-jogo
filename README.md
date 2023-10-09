@@ -6,6 +6,7 @@ A game inspired by the classic PAC-MAN implemented with functional style in Java
 # Usage
 
 - Access the [game site](https://snake-in-basket.netlify.app).
+- Watch the [game instructions]( https://youtu.be/uCuSrgKWz3E?feature=shared ) video.
 
 # How to play
 
