@@ -172,9 +172,7 @@ const eggWillBeEaten   = state => state.eggs.some(pointEqual(nextBite(state))) ?
 const willSnakeBeEaten = state => state.birds.some((p, i) => 
   isFrightened(state)(i) 
     ? false
-    : (pointEqual(nextBite(state))(p)
-       ||
-       pointEqual(state.snake[0])(p))
+    : willBirdBeEaten(state)(i)
   ) 
 // -bird states
 const willBirdBeEaten = state => i => (pointEqual(nextBite(state))(state.birds[i]) 
@@ -211,7 +209,7 @@ const nextSnake = state => willSnakeBeEaten(state)
     ? [nextBite(state)] 
     : state.snake) 
 // -pecks (bird movement)
-const chosenPeck = target => state => i => {
+const nextPeck = state => i => {
   // Preference in this order,
   // from highest to lowest
   const optionsPeck1 = [NORTH, WEST, SOUTH, EAST];
@@ -224,39 +222,45 @@ const chosenPeck = target => state => i => {
     ? randomPosition()
     : (areBirdsInScatterMode(state) 
       ? SCATTER_TARGETS[i]
-      : target)
+      : chaseTarget(state)(i))
     
   // Orders the movements according to 
   // the distance from the bird to the target
   // From closest to furthest
-  const optionsPeck4 = orderMoves([...optionsPeck3])(targetToUse)(state.birds[i]);
+  const optionsPeck4 = (optionsPeck3.length > 1)
+    ? orderMoves([...optionsPeck3])(targetToUse)(state.birds[i])
+    : optionsPeck3
   
   // Returns "best" move
   return optionsPeck4[0];
 }
+const chaseTarget = state => i => {
+  switch (i){
+    case 0: return bird1Target(state);
+    case 1: return bird2Target(state);
+    case 2: return bird3Target(state);
+    case 3: return bird4Target(state);
+  }
+}
 // peck from bird1, index (i) 0
-const nextPeck1 = state => {
+const bird1Target = state => {
   // General movement rule
   //   Targets the snake
   
-  const target = state.snake[0]
-
-  return chosenPeck(target)(state)(0);
+  return state.snake[0];
 }
-const nextPeck2 = state => {
+const bird2Target = state => {
   // General movement rule
   //   Targets where the snake will go
   
-  const target = pointEqual(state.moves[0])(NORTH)  
+  return pointEqual(state.moves[0])(NORTH)  
     // Offsets the meant target to the left,
     // if the snake is moving NORTH
     ? ({ x: (state.snake[0].x - 2), y: (state.snake[0].y - 2)}) 
     : ({ x: (state.snake[0].x + 2 * state.moves[0].x), 
          y: (state.snake[0].y + 2 * state.moves[0].y)});
-
-  return chosenPeck(target)(state)(1);
 }
-const nextPeck3 = state => {
+const bird3Target = state => {
   // General movement rule:
   //   Goes after the snake if distant,
   //   but goes to the bottom left corner if close
@@ -264,13 +268,11 @@ const nextPeck3 = state => {
   // Calculates the distance
   const radiusPeck = distance(state.snake[0])(state.birds[2])
   
-  const target = (radiusPeck <= 10) 
+  return (radiusPeck <= 10) 
     ? SCATTER_TARGETS[2]
-    : state.snake[0]
-  
-  return chosenPeck(target)(state)(2);
+    : state.snake[0];
 }
-const nextPeck4 = state => {
+const bird4Target = state => {
   // General movement rule:
   //   Tries to assist the bird1 
   //   by flanking the snake
@@ -282,15 +284,13 @@ const nextPeck4 = state => {
     : nextBite(state)
   const target2 = state.birds[0]
   
-  const target = ({x: (2 * target1.x - target2.x),
-                   y: (2 * target1.y - target2.y)})
-
-  return chosenPeck(target)(state)(3);
+  return ({x: (2 * target1.x - target2.x),
+           y: (2 * target1.y - target2.y)});
 }
-const nextPecks = state => [nextPeck1(state),
-                            nextPeck2(state),
-                            nextPeck3(state),
-                            nextPeck4(state)]
+const nextPecks = state => [nextPeck(state)(0),
+                            nextPeck(state)(1),
+                            nextPeck(state)(2),
+                            nextPeck(state)(3)]
 // -birds state
 const nextBeak = state => i => move => ({
       x: adjustInterval(COLS)(state.birds[i].x + move.x),
