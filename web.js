@@ -31,7 +31,7 @@ const draw = () => {
   WALLS[0].map(p1 => {
     SPRITE_WALL.map(p2 => {
       ctx.fillStyle = p2.colour
-      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(p2.l/BITS))
     })
     switch (p1.type) {
     case 0:
@@ -44,7 +44,7 @@ const draw = () => {
     case 2:
     WALL_WEST.map(p2 => {
       ctx.fillStyle = p2.colour
-      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(4/BITS), y(p2.l/BITS))
     })
         break;
     case 3:
@@ -67,15 +67,17 @@ const draw = () => {
     })
   })
   WALLS[2].map(p1 => {
+    //2x2 "pixels"
     ctx.fillStyle = 'rgb(30,30,255)'
     BLUEBERRY.map(p2 => {
-      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(2/BITS), y(2/BITS))
     })
   })
   WALLS[3].map(p1 => {
+    //2x3 "pixels"
     RASPBERRY.map(p2 => {
       ctx.fillStyle = p2.colour
-      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(p2.l/BITS), y(1/BITS))
+      ctx.fillRect(xg(p1)(p2), yg(p1)(p2), x(2/BITS), y(1/BITS))
     })
   })
   
