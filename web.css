@@ -19,12 +19,6 @@ html, body {
   margin: 20px auto;
 }
 
-canvas {
-  width: 672px;
-  height: 448px;
-}
-
-
 .game {
   flex: 1;
   border: 2px solid #fff;
@@ -36,6 +30,4 @@ canvas {
   padding: 20px;
   text-align: left;
   border: 2px solid #fff;
-
 }
-
